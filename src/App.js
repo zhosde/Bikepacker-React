@@ -63,8 +63,19 @@ class App extends Component {
             path="/signup"
             render={() => <Signup getUser={this.getTheUser} />}
           />
-          <Route exact path="/products" component={ProductList} />
-          <Route exact path="/products/:id" component={ProductDetails} />
+          <Route
+            exact
+            path="/products"
+            user={this.state.user}
+            component={ProductList}
+          />
+          <Route
+            exact
+            path="/products/:id"
+            render={(props) => (
+              <ProductDetails {...props} user={this.state.user} />
+            )}
+          />
         </Switch>
       </div>
     );

@@ -1,8 +1,8 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import authService from "./../auth/auth-service";
+import authService from "../components/auth/auth-service";
 
-class Navbar extends Component {
+class Navbar extends React.Component {
   logoutUser = () => {
     authService.logout().then(() => {
       this.props.getUser(null, false);
@@ -24,7 +24,7 @@ class Navbar extends Component {
             </li>
             <li>
               <Link to="/">
-                <button onClick={() => this.logoutUser()}>Logout</button>
+                <button type='submit' onClick={() => this.logoutUser()}>Logout</button>
               </Link>
             </li>
           </ul>

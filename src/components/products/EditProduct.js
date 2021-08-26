@@ -1,56 +1,48 @@
 import React, { Component } from "react";
 import axios from "axios";
 
-class AddProduct extends Component {
+class EditProduct extends Component {
   state = {
-    name: "",
-    description: "",
-    category: "",
-    image: "",
-    price: 0,
-    stocked: true,
+    name: this.props.theproduct.name,
+    description: this.props.theproduct.description,
+    category: this.props.theproduct.category,
+    image: this.props.theproduct.image,
+    price: this.props.theproduct.price,
+    stocked: this.props.theproduct.stocked
   };
 
   handleFormSubmit = (event) => {
-    event.preventDefault();
-    const name = this.state.name;
+    const title = this.state.title;
     const description = this.state.description;
     const category = this.state.category;
     const image = this.state.image;
     const price = this.state.price;
-    const stocked = this.state.stocked;
+    const stocked = this. state.stocked;
+
+    event.preventDefault();
 
     axios
-      .post("http://localhost:5000/api/products", {
-        name,
-        description,
-        category,
-        image,
-        price,
-        stocked,
-      })
+      .put(
+        `http://localhost:5000/api/products/${this.props.theproduct._id}`,
+        { title, description },
+      )
       .then(() => {
-        this.props.getData();
-        this.setState({
-          name: "",
-          description: "",
-          category: "",
-          image: "",
-          price: 0,
-          stocked: true,
-        });
+        // Use the passed down api call to render the updated product data
+        this.props.getTheproduct();
       })
       .catch((error) => console.log(error));
   };
 
   handleChange = (event) => {
-    const { name, value } = event.target;
-    this.setState({ [name]: value });
+      const {name, value} = event.target;
+    this.setState({[name]: value });
   };
 
   render() {
     return (
       <div>
+        <hr />
+        <h3>Edit form</h3>
         <form onSubmit={this.handleFormSubmit}>
           <label>Name:</label>
           <input
@@ -59,7 +51,6 @@ class AddProduct extends Component {
             value={this.state.name}
             onChange={(e) => this.handleChange(e)}
           />
-
           <label>Category:</label>
           <input
             type="text"
@@ -67,14 +58,6 @@ class AddProduct extends Component {
             value={this.state.category}
             onChange={(e) => this.handleChange(e)}
           />
-
-          <label>Description:</label>
-          <textarea
-            name="description"
-            value={this.state.description}
-            onChange={(e) => this.handleChange(e)}
-          />
-
           <label>Price:</label>
           <input
             type="number"
@@ -82,7 +65,6 @@ class AddProduct extends Component {
             value={this.state.price}
             onChange={(e) => this.handleChange(e)}
           />
-
           <label>Stocked:</label>
           <select
             value={this.state.stocked}
@@ -91,7 +73,12 @@ class AddProduct extends Component {
             <option value="true">True</option>
             <option value="false">False</option>
           </select>
-          
+          <label>Description:</label>
+          <textarea
+            name="description"
+            value={this.state.description}
+            onChange={(e) => this.handleChange(e)}
+          />
           <label>Image:</label>
           <input
             type="file"
@@ -99,7 +86,6 @@ class AddProduct extends Component {
             value={this.state.image}
             onChange={(e) => this.handleChange(e)}
           />
-
           <input type="submit" value="Submit" />
         </form>
       </div>
@@ -107,4 +93,4 @@ class AddProduct extends Component {
   }
 }
 
-export default AddProduct;
+export default EditProduct;

@@ -22,7 +22,7 @@ class ProductList extends Component {
   render() {
     return (
       <div>
-        <div style={{ width: "60%", float: "left" }}>
+        <div>
           {this.state.listOfProducts.map((product) => {
             return (
               <div key={product._id}>
@@ -34,7 +34,7 @@ class ProductList extends Component {
             );
           })}
         </div>
-        <div style={{ width: "40%", float: "right" }}>
+        <div>
           <AddProduct getData={() => this.getAllProducts()} /> 
         </div>
       </div>
