@@ -1,20 +1,40 @@
-import React, { Component } from 'react'
-import ProductList from './products/ProductList'
+import React, { Component } from "react";
+import ProductList from "./products/ProductList";
+import Navbar from "./Navbar";
 
-export default class Main extends Component {
-    state={
-        productList: this.props.products,
-        searchList: this.props.products,
-    }
+class Main extends Component {
+  state = {
+    filterStr: "",
+  };
 
-    
+  SearchTheProduct = (input) => {
+    this.setState({
+      filterStr: input,
+    });
+  };
 
+  // get all the products from App.js and filter them with search word
+  getFilteredProducts() {
+    const productsCopy = [...this.props.products];
+    let filteredProducts = productsCopy.filter((product) => {
+      return product.name
+        .toLowerCase()
+        .includes(this.state.filterStr.toLowerCase());
+    });
+    return filteredProducts;
+  }
 
-    render() {
-        return (
-            <div>
-                
-            </div>
-        )
-    }
+  render() {
+    // let updating be in render phase
+    const filteredProducts = this.getFilteredProducts();
+
+    return (
+      <div>
+        <Navbar SearchTheProduct={this.SearchTheProduct} />
+        <ProductList products={filteredProducts} />
+      </div>
+    );
+  }
 }
+
+export default Main;

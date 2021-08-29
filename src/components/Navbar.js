@@ -1,55 +1,51 @@
-import React from "react";
-import { Link } from "react-router-dom";
-import authService from "../components/auth/auth-service";
+import React, { Component } from "react";
+import { NavLink as Link } from "react-router-dom";
+import logo from "../assets/logo.png";
 
-class Navbar extends React.Component {
-  logoutUser = () => {
-    authService.logout().then(() => {
-      this.props.getUser(null, false);
-    });
+class Navbar extends Component {
+  state = {
+    searchWord: "",
+    SearchTheProduct: this.props.SearchTheProduct,
+  };
+
+  handleSearch = async (event) => {
+    await this.setState({ searchWord: event.target.value });
+    this.state.SearchTheProduct(this.state.searchWord);
   };
 
   render() {
-    const { userData, userIsLoggedIn } = this.props;
+    const linkStyle = {
+      color: "white",
+    };
 
-    if (userIsLoggedIn) {
-      return (
-        <nav className="nav-style">
-          <ul>
-            {userIsLoggedIn && <li>Welcome, {userData.username} </li>}
-            <li>
-              <Link to="/products" style={{ textDecoration: "none" }}>
-                Products
-              </Link>
-            </li>
-            <li>
-              <Link to="/">
-                <button type='submit' onClick={() => this.logoutUser()}>Logout</button>
-              </Link>
-            </li>
-          </ul>
-        </nav>
-      );
-    } else {
-      return (
-        <div>
-          <nav className="nav-style">
-            <ul>
-              <li>
-                <Link to="/" style={{ textDecoration: "none" }}>
-                  Login
-                </Link>
-              </li>
-              <li>
-                <Link to="/signup" style={{ textDecoration: "none" }}>
-                  Signup
-                </Link>
-              </li>
-            </ul>
-          </nav>
-        </div>
-      );
-    }
+    return (
+      <div>
+        <ul>
+          <li>
+            <img src={logo} alt="logo" />
+          </li>
+          <li>
+            <input
+              type="search"
+              name="search"
+              placeholder="Search..."
+              value={this.state.searchWord}
+              onChange={this.handleSearch}
+            ></input>
+          </li>
+          <li>
+            <Link to="/profile" style={linkStyle}>
+              Profile
+            </Link>
+          </li>
+          <li>
+            <Link to="/orders" style={linkStyle}>
+              Cart
+            </Link>
+          </li>
+        </ul>
+      </div>
+    );
   }
 }
 

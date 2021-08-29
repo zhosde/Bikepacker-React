@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import axios from "axios";
+import service from "../../api/service"
 
 class AddProduct extends Component {
   state = {
@@ -13,24 +14,36 @@ class AddProduct extends Component {
 
   handleFormSubmit = (event) => {
     event.preventDefault();
-    const name = this.state.name;
-    const description = this.state.description;
-    const category = this.state.category;
-    const image = this.state.image;
-    const price = this.state.price;
-    const stocked = this.state.stocked;
 
-    axios
-      .post("http://localhost:5000/api/products", {
-        name,
-        description,
-        category,
-        image,
-        price,
-        stocked,
+    // const name = this.state.name;
+    // const description = this.state.description;
+    // const category = this.state.category;
+    // const image = this.state.image;
+    // const price = this.state.price;
+    // const stocked = this.state.stocked;
+
+    service
+      .saveNewProduct(this.state)
+      .then((res) => {
+        console.log("added new product: ", res);
       })
+      // .catch((err) => console.log("Error while adding the new product: ", err));
+
+    // axios
+    //   .post(
+    //     "http://localhost:5000/api/products",
+    //     {
+    //       name,
+    //       description,
+    //       category,
+    //       image,
+    //       price,
+    //       stocked,
+    //     },
+    //     { withCredentials: true }
+    //   )
+    
       .then(() => {
-        this.props.getData();
         this.setState({
           name: "",
           description: "",
@@ -46,6 +59,18 @@ class AddProduct extends Component {
   handleChange = (event) => {
     const { name, value } = event.target;
     this.setState({ [name]: value });
+  };
+
+  handleFileUpload = (e) => {
+    const uploadData = new FormData();
+    uploadData.append("image", e.target.files[0]);
+
+    service
+      .handleUpload(uploadData)
+      .then((response) => {
+        this.setState({ image: response.imageUrl });
+      })
+      .catch((err) => console.log("Error while uploading the file: ", err));
   };
 
   render() {
@@ -91,13 +116,13 @@ class AddProduct extends Component {
             <option value="true">True</option>
             <option value="false">False</option>
           </select>
-          
+
           <label>Image:</label>
           <input
             type="file"
             name="image"
             value={this.state.image}
-            onChange={(e) => this.handleChange(e)}
+            onChange={this.handleFileUpload}
           />
 
           <input type="submit" value="Submit" />

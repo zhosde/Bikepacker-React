@@ -1,33 +1,22 @@
 import React, { Component } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
+import EditProduct from "./EditProduct"
+import Cart from "../Cart"
 
 class ProductDetails extends Component {
-  state = {};
-
-  componentDidMount() {
-    this.getSingleProduct();
+  constructor(props){
+    super(props)
+    this.state = {
+      productInCart: 0,
+    };
   }
 
-  getSingleProduct = () => {
-    const { params } = this.props.match;
-    axios
-      .get(`http://localhost:5000/api/products/${params.id}`)
-      .then((responseFromApi) => {
-        const theProduct = responseFromApi.data;
-        this.setState(theProduct);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
-
   renderEditForm = () => {
-    if (this.state.name) {
+    if (this.props.name) {
       return (
         <EditProduct
-          theProduct={this.state}
-          getTheProduct={this.getSingleProduct}
+          theProduct={this.props}
           {...this.props}
         />
       );
@@ -37,7 +26,9 @@ class ProductDetails extends Component {
   deleteProduct = () => {
     const { params } = this.props.match;
     axios
-      .delete(`http://localhost:5000/api/products/${params.id}`)
+      .delete(`http://localhost:5000/api/products/${params.id}`, {
+        withCredentials: true,
+      })
       .then(() => {
         this.props.history.push("/products");
       })
@@ -46,25 +37,33 @@ class ProductDetails extends Component {
       });
   };
 
-  addToCartBtn = (event) => {
-    event.preventDefault();
-    const items = [{ productID: this.state._id, qty: this.state.qty }];
-    const user = this.props.user._id;
-    axios
-      .post(`http://localhost:5000/api/orders`, { items, user })
-      .then((orderFromDB) => {
-        return <Cart theOrder={orderFromDB} theProduct={this.state} />;
-      });
+  // addToCartBtn = (event) => {
+  //   event.preventDefault();
+  //   const items = [{ productID: this.state._id, qty: this.state.qty }];
+  //   const user = this.props.user._id;
+  //   axios
+  //     .post(`http://localhost:5000/api/orders`, { items, user })
+  //     .then((orderFromDB) => {
+  //       return <Cart theOrder={orderFromDB} theProduct={this.state} />;
+  //     });
+  // };
+
+  addToCartBtn = () => {
+    this.setState((prevState) => {
+      return {
+        productInCart: prevState.productInCart + 1,
+      };
+    });
   };
 
   ownershipCheck = () => {
-    const currentUserIsAdmin = this.props.user && user.isAdmin;
+    const currentUserIsAdmin = this.props.user && this.props.user.isAdmin;
     if (currentUserIsAdmin) {
       return (
         <>
           <div>{this.renderEditForm()}</div>
           <div>
-            <button onClick={() => this.deleteProduct(this.state._id)}>
+            <button onClick={() => this.deleteProduct(this.props._id)}>
               Delete product
             </button>
           </div>
@@ -77,12 +76,12 @@ class ProductDetails extends Component {
     return (
       <>
         <div>
-          <img src={this.state.image} />
-          <h1>{this.state.name}</h1>
-          <p>{this.state.price}</p>
-          <p>{this.state.description}</p>
+          <img src={this.props.image} />
+          <h1>{this.props.name}</h1>
+          <p>{this.props.price}</p>
+          <p>{this.props.description}</p>
           <div>
-            <button type="submit" onClick={this.addToCartBtn}>
+            <button onClick={this.addToCartBtn}>
               Add In Cart
             </button>
           </div>

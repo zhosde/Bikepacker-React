@@ -3,16 +3,16 @@ import axios from "axios";
 
 class EditProduct extends Component {
   state = {
-    name: this.props.theproduct.name,
-    description: this.props.theproduct.description,
-    category: this.props.theproduct.category,
-    image: this.props.theproduct.image,
-    price: this.props.theproduct.price,
-    stocked: this.props.theproduct.stocked
+    name: this.props.theProduct.name,
+    description: this.props.theProduct.description,
+    category: this.props.theProduct.category,
+    image: this.props.theProduct.image,
+    price: this.props.theProduct.price,
+    stocked: this.props.theProduct.stocked
   };
 
   handleFormSubmit = (event) => {
-    const title = this.state.title;
+    const name = this.state.name;
     const description = this.state.description;
     const category = this.state.category;
     const image = this.state.image;
@@ -23,12 +23,13 @@ class EditProduct extends Component {
 
     axios
       .put(
-        `http://localhost:5000/api/products/${this.props.theproduct._id}`,
-        { title, description },
+        `http://localhost:5000/api/products/${this.props.theProduct._id}`,
+        { name, description, category, image, price, stocked },
+        { withCredentials: true }
       )
       .then(() => {
         // Use the passed down api call to render the updated product data
-        this.props.getTheproduct();
+        this.props.getTheProduct();
       })
       .catch((error) => console.log(error));
   };
