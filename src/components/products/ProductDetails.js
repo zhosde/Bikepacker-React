@@ -100,20 +100,23 @@ class ProductDetails extends Component {
     return (
       <>
         <Navbar />
+        <hr className="hr-line" />
         <div className="product-detail">
           <div>
             <img src={this.props.image} />
           </div>
           <div className="product-info">
             <h1>{this.props.name}</h1>
-            <p>{this.props.price}</p>
-            <label>Qty: </label>
-            <input
-              type="number"
-              name="qty"
-              value={this.state.numOfProduct}
-              onChange={(e) => this.handleChangeQty(e)}
-            />
+            <p>{this.props.price} €</p>
+            <label>
+              Qty:
+              <input
+                type="number"
+                name="qty"
+                value={this.state.numOfProduct}
+                onChange={(e) => this.handleChangeQty(e)}
+              />
+            </label>
             <br />
             <button onClick={this.addToCartBtn}>Add In Cart</button>
             <br />

@@ -1,6 +1,9 @@
 import React, { Component } from "react";
 import { NavLink as Link } from "react-router-dom";
 import logo from "../assets/main-logo.png";
+import heart from '../assets/heart.png'
+import profile from "../assets/profile.png";
+import cart from "../assets/cart.png";
 
 class Navbar extends Component {
   state = {
@@ -19,30 +22,37 @@ class Navbar extends Component {
     };
 
     return (
-        <div className="navbar">
+      <div className="navbar">
+        <Link to="/">
           <div>
-              <img src={logo} alt="logo" />
-            </div>
-            <div className='searchbar'>
-              <input
-                type="search"
-                name="search"
-                placeholder="Search..."
-                value={this.state.searchWord}
-                onChange={this.handleSearch}
-              ></input>
-            </div>
-            <div>
-              <Link to="/profile" style={linkStyle}>
-                Profile
-              </Link>
-            </div>
-            <div>
-              <Link to="/cart" style={linkStyle}>
-                Cart
-              </Link>
-            </div>
+            <img id="logo" src={logo} alt="logo" />
+          </div>
+        </Link>
+        <div className="searchbar">
+          <input
+            type="search"
+            name="search"
+            placeholder="Search..."
+            value={this.state.searchWord}
+            onChange={this.handleSearch}
+          ></input>
         </div>
+        <div className="navbar-icon">
+          <Link to="/profile" style={linkStyle}>
+            <img src={profile} alt="profile icon" />
+          </Link>
+        </div>
+        <div className="navbar-icon">
+          <Link to="/cart" style={linkStyle}>
+            <img src={cart} alt="cart icon" />
+          </Link>
+        </div>
+        <div className="navbar-icon">
+          <Link to="/profile" style={linkStyle}>
+            <img src={heart} alt="heart icon" />
+          </Link>
+        </div>
+      </div>
     );
   }
 }

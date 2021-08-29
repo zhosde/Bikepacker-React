@@ -32,6 +32,7 @@ class Main extends Component {
       <main>
         <div>
           <Navbar SearchTheProduct={this.SearchTheProduct} />
+          <hr className="hr-line" />
         </div>
         <div>
           <ProductList products={filteredProducts} />

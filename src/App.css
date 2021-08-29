@@ -77,21 +77,42 @@
   padding: 2vh;
 }
 
-.navbar img {
-  height: 15vh;
+#logo {
+  height: auto;
+  width:100%;
+  max-width: 200px;
+}
+
+.navbar-icon img {
+  height: auto;
+  width:100%;
+  max-width: 50px;
+  margin-left: 5%;
+  margin-top: 90px;
 }
 
 .navbar {
-  margin: 1.5vh;
-}
-
-.navbar {
+  margin-left: 5%;
+  margin-right: 5%;
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
+}
+
+.searchbar {
+  margin-top: 7%;
 }
 
 .searchbar input{
-  width: 50vh;
+  font-size: 20px;
+  width: 400px;
+  height: 60px;
+}
+
+.hr-line {
+  background-color: #fff;
+	border-top: 3px dashed #8c8b8b;
+  margin-left: 2vh;
+  margin-right: 2vh;
 }
 
 .product-list, .product-detail {
@@ -108,6 +129,10 @@
   margin-left: 2vh;
 }
 
+.product-list h3 {
+  text-align: center;
+}
+
 .product-list img{
   width: 200px;
   height: 200px;
@@ -115,14 +140,32 @@
 }
 
 .product-detail {
-  font-size: 26px;
+  font-size: 24px;
   display: flex;
+  justify-content: space-around;
 }
 
 .product-detail img {
   width: 400px;
   height: 400px;
   object-fit: cover;
+}
+
+.product-info {
+  margin-top: 3%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.product-info input {
+  width: 50%;
+  margin-left: 20%;
+}
+
+.product-info button {
+  padding: 2%;
 }
 
 .edit-form h1 {

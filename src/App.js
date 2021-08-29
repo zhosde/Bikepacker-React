@@ -10,6 +10,7 @@ import Signup from "./components/auth/Signup";
 import authService from "./components/auth/auth-service";
 import Login from "./components/auth/Login";
 import AddProduct from "./components/products/AddProduct";
+import About from "./components/About";
 
 class App extends Component {
   state = {
@@ -134,6 +135,13 @@ class App extends Component {
                     user={this.state.user}
                   />
                 );
+              }}
+            />
+            <Route
+              exact
+              path="/about"
+              render={(props) => {
+                return <About />;
               }}
             />
           </div>
