@@ -33,7 +33,7 @@ class HomePage extends Component {
                   </Link>
                 </li>
                 <li>
-                  <Link to="/orders" style={linkStyle}>
+                  <Link to="/cart" style={linkStyle}>
                     Cart
                   </Link>
                 </li>

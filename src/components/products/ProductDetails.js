@@ -2,21 +2,37 @@ import React, { Component } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import EditProduct from "./EditProduct"
+import Navbar from "../Navbar";
 import Cart from "../Cart"
 
 class ProductDetails extends Component {
-  constructor(props){
-    super(props)
-    this.state = {
-      productInCart: 0,
-    };
-  }
+  state = {
+    numOfProduct: 0,
+    numOfProductInCart: 0,
+    productInCart: [],
+  };
+
+  getSingleProduct = () => {
+    const { id } = this.props._id;
+    axios
+      .get(`http://localhost:5000/api/products/${id}`, {
+        withCredentials: true,
+      })
+      .then((responseFromApi) => {
+        const theProduct = responseFromApi.data;
+        // this.setState(theProduct);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
 
   renderEditForm = () => {
     if (this.props.name) {
       return (
         <EditProduct
           theProduct={this.props}
+          getTheProduct={this.getSingleProduct}
           {...this.props}
         />
       );
@@ -30,29 +46,34 @@ class ProductDetails extends Component {
         withCredentials: true,
       })
       .then(() => {
-        this.props.history.push("/products");
+        this.props.history.push("/shop");
       })
       .catch((err) => {
         console.log(err);
       });
   };
 
-  // addToCartBtn = (event) => {
-  //   event.preventDefault();
-  //   const items = [{ productID: this.state._id, qty: this.state.qty }];
-  //   const user = this.props.user._id;
-  //   axios
-  //     .post(`http://localhost:5000/api/orders`, { items, user })
-  //     .then((orderFromDB) => {
-  //       return <Cart theOrder={orderFromDB} theProduct={this.state} />;
-  //     });
-  // };
-
-  addToCartBtn = () => {
+  addToCartBtn = (event) => {
+    event.preventDefault();
+    const cartItem = [{ productID: this.props._id, qty: this.props.qty }];
     this.setState((prevState) => {
       return {
-        productInCart: prevState.productInCart + 1,
+        numOfProductInCart: prevState.numOfProductInCart + 1,
+        productInCart: prevState.productInCart.push(cartItem),
       };
+    });
+    return (
+      <Cart
+        productInCart={this.state.productInCart}
+        numOfProduct={this.state.numOfProduct}
+        user = {this.props.user}
+      />
+    );
+  };
+
+  handleChangeQty = (event) => {
+    this.setState({
+      numOfProduct: event.target.value,
     });
   };
 
@@ -63,7 +84,10 @@ class ProductDetails extends Component {
         <>
           <div>{this.renderEditForm()}</div>
           <div>
-            <button onClick={() => this.deleteProduct(this.props._id)}>
+            <button
+              className="delete-btn"
+              onClick={() => this.deleteProduct(this.props._id)}
+            >
               Delete product
             </button>
           </div>
@@ -75,18 +99,28 @@ class ProductDetails extends Component {
   render() {
     return (
       <>
-        <div>
-          <img src={this.props.image} />
-          <h1>{this.props.name}</h1>
-          <p>{this.props.price}</p>
-          <p>{this.props.description}</p>
+        <Navbar />
+        <div className="product-detail">
           <div>
-            <button onClick={this.addToCartBtn}>
-              Add In Cart
-            </button>
+            <img src={this.props.image} />
           </div>
-          <Link to={`/orders`}>To The Cart</Link>
-          <Link to={"/products"}>Back to products</Link>
+          <div className="product-info">
+            <h1>{this.props.name}</h1>
+            <p>{this.props.price}</p>
+            <label>Qty: </label>
+            <input
+              type="number"
+              name="qty"
+              value={this.state.numOfProduct}
+              onChange={(e) => this.handleChangeQty(e)}
+            />
+            <br />
+            <button onClick={this.addToCartBtn}>Add In Cart</button>
+            <br />
+            <Link to={"/shop"}>Back to products</Link>
+            <hr />
+            <p>{this.props.description}</p>
+          </div>
         </div>
         <div> {this.ownershipCheck()} </div>
       </>

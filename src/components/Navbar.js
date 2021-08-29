@@ -38,7 +38,7 @@ class Navbar extends Component {
               </Link>
             </div>
             <div>
-              <Link to="/orders" style={linkStyle}>
+              <Link to="/cart" style={linkStyle}>
                 Cart
               </Link>
             </div>

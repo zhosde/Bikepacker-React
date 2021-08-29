@@ -28,7 +28,7 @@ handleChange = (event) => {
   render(){
     return (
       <div className="signup">
-        <p>Already have an account?</p>
+        <p>Don't have an account?</p>
         <form onSubmit={this.handleFormSubmit}>
           <label>
             Username:

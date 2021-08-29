@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import axios from "axios";
 import service from "../../api/service"
+import {Redirect} from 'react-router-dom'
 
 class AddProduct extends Component {
   state = {
@@ -26,8 +27,20 @@ class AddProduct extends Component {
       .saveNewProduct(this.state)
       .then((res) => {
         console.log("added new product: ", res);
+        return <Redirect to="/shop" />;
       })
-      // .catch((err) => console.log("Error while adding the new product: ", err));
+
+      .then(() => {
+        this.setState({
+          name: "",
+          description: "",
+          category: "",
+          image: "",
+          price: 0,
+          stocked: true,
+        });
+      })
+      .catch((err) => console.log("Error while adding the new product: ", err));
 
     // axios
     //   .post(
@@ -42,18 +55,6 @@ class AddProduct extends Component {
     //     },
     //     { withCredentials: true }
     //   )
-    
-      // .then(() => {
-      //   this.setState({
-      //     name: "",
-      //     description: "",
-      //     category: "",
-      //     image: "",
-      //     price: 0,
-      //     stocked: true,
-      //   });
-      // })
-      .catch((error) => console.log(error));
   };
 
   handleChange = (event) => {

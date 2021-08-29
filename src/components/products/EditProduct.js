@@ -17,7 +17,7 @@ class EditProduct extends Component {
     const category = this.state.category;
     const image = this.state.image;
     const price = this.state.price;
-    const stocked = this. state.stocked;
+    const stocked = this.state.stocked;
 
     event.preventDefault();
 
@@ -41,9 +41,9 @@ class EditProduct extends Component {
 
   render() {
     return (
-      <div>
+      <div className='edit-form'>
         <hr />
-        <h3>Edit form</h3>
+        <h1>Edit</h1>
         <form onSubmit={this.handleFormSubmit}>
           <label>Name:</label>
           <input
@@ -84,7 +84,6 @@ class EditProduct extends Component {
           <input
             type="file"
             name="image"
-            value={this.state.image}
             onChange={(e) => this.handleChange(e)}
           />
           <input type="submit" value="Submit" />

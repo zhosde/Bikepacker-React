@@ -73,7 +73,7 @@
   margin-top: 5vh;
 }
 
-.add-product label {
+.add-product label, .edit-form label {
   padding: 2vh;
 }
 
@@ -94,18 +94,52 @@
   width: 50vh;
 }
 
-.product-list {
+.product-list, .product-detail {
   margin: 5vh;
 }
 
-.product-list ul{
+.product-list ul {
   display: flex;
   justify-content: space-around;
   flex-wrap: wrap;
 }
 
-.product-list img {
+.product-list li {
+  margin-left: 2vh;
+}
+
+.product-list img{
   width: 200px;
   height: 200px;
   object-fit: cover;
+}
+
+.product-detail {
+  font-size: 26px;
+  display: flex;
+}
+
+.product-detail img {
+  width: 400px;
+  height: 400px;
+  object-fit: cover;
+}
+
+.edit-form h1 {
+  font-size: 26px;
+  text-align: center;
+  color: rebeccapurple;
+}
+
+.edit-form form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.delete-btn {
+  background-color: rebeccapurple;
+  color: white;
+  padding: 2vh;
+  margin-left: 60%;
 }

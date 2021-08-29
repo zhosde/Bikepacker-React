@@ -68,62 +68,75 @@ class App extends Component {
       <div className="App">
         <Switch>
           <Route exact path="/" component={HomePage}></Route>
-          <Route
-            exact
-            path="/profile"
-            render={(props) => {
-              return (
-                <UserProfile
-                  {...props}
-                  userData={this.state.user}
-                  userIsLoggedIn={this.state.isLoggedIn}
-                  getUser={this.getTheUser}
-                  products={this.state.listOfProducts}
-                />
-              );
-            }}
-          ></Route>
-          <Route
-            exact
-            path="/shop"
-            render={(props) => {
-              return <Main {...props} products={this.state.listOfProducts} />;
-            }}
-          ></Route>
-          <Route
-            exact
-            path="/profile"
-            render={(props) => { return <Login {...props} getUser={this.getTheUser} />}}
-          />
-          <Route
-            exact
-            path="/profile"
-            render={(props) => {return <Signup {...props} getUser={this.getTheUser} />}}
-          />
-          <Route
-            exact
-            path="/products"
-            render={(props) => {return <AddProduct
-                {...props}
-                user={this.state.user}
-                products={this.state.listOfProducts}
-              />
-            }}
-          />
-          <Route
-            exact
-            path="/products/:id"
-            render={(routeProps) => {
-              const requestedProduct = this.state.listOfProducts.find(
-                (product) => {
-                  return product._id === routeProps.match.params.id;
-                }
-              );
-              return (
-                <ProductDetails {...requestedProduct} user={this.state.user} />
-              );
-            }}
-          />
+          <div>
+            <Route
+              exact
+              path="/profile"
+              render={(props) => {
+                return (
+                  <UserProfile
+                    {...props}
+                    userData={this.state.user}
+                    userIsLoggedIn={this.state.isLoggedIn}
+                    getUser={this.getTheUser}
+                    products={this.state.listOfProducts}
+                  />
+                );
+              }}
+            ></Route>
+            <Route
+              exact
+              path="/shop"
+              render={(props) => {
+                return <Main {...props} products={this.state.listOfProducts} />;
+              }}
+            ></Route>
+            <Route
+              exact
+              path="/profile"
+              render={(props) => {
+                return <Login {...props} getUser={this.getTheUser} />;
+              }}
+            />
+            <Route
+              exact
+              path="/profile"
+              render={(props) => {
+                return <Signup {...props} getUser={this.getTheUser} />;
+              }}
+            />
+            <Route
+              exact
+              path="/products"
+              render={(props) => {
+                return (
+                  <AddProduct
+                    {...props}
+                    user={this.state.user}
+                    products={this.state.listOfProducts}
+                  />
+                );
+              }}
+            />
+            <Route
+              exact
+              path="/products/:id"
+              render={(routeProps) => {
+                const requestedProduct = this.state.listOfProducts.find(
+                  (product) => {
+                    return product._id === routeProps.match.params.id;
+                  }
+                );
+                return (
+                  <ProductDetails
+                    {...requestedProduct}
+                    {...routeProps}
+                    user={this.state.user}
+                  />
+                );
+              }}
+            />
+          </div>
         </Switch>
       </div>
     );
