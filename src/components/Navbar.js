@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { NavLink as Link } from "react-router-dom";
-import logo from "../assets/logo.png";
+import logo from "../assets/main-logo.png";
 
 class Navbar extends Component {
   state = {
@@ -15,36 +15,34 @@ class Navbar extends Component {
 
   render() {
     const linkStyle = {
-      color: "white",
+      color: "black",
     };
 
     return (
-      <div>
-        <ul>
-          <li>
-            <img src={logo} alt="logo" />
-          </li>
-          <li>
-            <input
-              type="search"
-              name="search"
-              placeholder="Search..."
-              value={this.state.searchWord}
-              onChange={this.handleSearch}
-            ></input>
-          </li>
-          <li>
-            <Link to="/profile" style={linkStyle}>
-              Profile
-            </Link>
-          </li>
-          <li>
-            <Link to="/orders" style={linkStyle}>
-              Cart
-            </Link>
-          </li>
-        </ul>
-      </div>
+        <div className="navbar">
+          <div>
+              <img src={logo} alt="logo" />
+            </div>
+            <div className='searchbar'>
+              <input
+                type="search"
+                name="search"
+                placeholder="Search..."
+                value={this.state.searchWord}
+                onChange={this.handleSearch}
+              ></input>
+            </div>
+            <div>
+              <Link to="/profile" style={linkStyle}>
+                Profile
+              </Link>
+            </div>
+            <div>
+              <Link to="/orders" style={linkStyle}>
+                Cart
+              </Link>
+            </div>
+        </div>
     );
   }
 }

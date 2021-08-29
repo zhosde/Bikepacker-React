@@ -29,10 +29,14 @@ class Main extends Component {
     const filteredProducts = this.getFilteredProducts();
 
     return (
-      <div>
-        <Navbar SearchTheProduct={this.SearchTheProduct} />
-        <ProductList products={filteredProducts} />
-      </div>
+      <main>
+        <div>
+          <Navbar SearchTheProduct={this.SearchTheProduct} />
+        </div>
+        <div>
+          <ProductList products={filteredProducts} />
+        </div>
+      </main>
     );
   }
 }

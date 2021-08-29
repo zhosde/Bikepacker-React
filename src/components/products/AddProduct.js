@@ -7,7 +7,7 @@ class AddProduct extends Component {
     name: "",
     description: "",
     category: "",
-    image: "",
+    image: '',
     price: 0,
     stocked: true,
   };
@@ -43,16 +43,16 @@ class AddProduct extends Component {
     //     { withCredentials: true }
     //   )
     
-      .then(() => {
-        this.setState({
-          name: "",
-          description: "",
-          category: "",
-          image: "",
-          price: 0,
-          stocked: true,
-        });
-      })
+      // .then(() => {
+      //   this.setState({
+      //     name: "",
+      //     description: "",
+      //     category: "",
+      //     image: "",
+      //     price: 0,
+      //     stocked: true,
+      //   });
+      // })
       .catch((error) => console.log(error));
   };
 
@@ -75,7 +75,7 @@ class AddProduct extends Component {
 
   render() {
     return (
-      <div>
+      <div className='add-product'>
         <form onSubmit={this.handleFormSubmit}>
           <label>Name:</label>
           <input
@@ -121,7 +121,6 @@ class AddProduct extends Component {
           <input
             type="file"
             name="image"
-            value={this.state.image}
             onChange={this.handleFileUpload}
           />
 

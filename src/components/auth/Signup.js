@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import authService from "./auth-service";
-import { Link } from 'react-router-dom';
 
 class Signup extends Component {
 
@@ -28,7 +27,8 @@ handleChange = (event) => {
 
   render(){
     return (
-      <div>
+      <div className="signup">
+        <p>Already have an account?</p>
         <form onSubmit={this.handleFormSubmit}>
           <label>
             Username:
@@ -52,11 +52,6 @@ handleChange = (event) => {
 
           <button type="submit"> Signup </button>
         </form>
-
-        <p>
-          Already have an account?
-          <Link to={"/"}> Login</Link>
-        </p>
       </div>
     );
   }

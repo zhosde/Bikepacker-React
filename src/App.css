@@ -33,3 +33,79 @@
   bottom: 50vh;
 }
 
+.login-signup {
+  font-size: 1.3rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  margin-top: 15vh;
+}
+
+.login, .signup {
+  border: 1px solid grey;
+  background-color: lightgray;
+  padding: 3vh;
+}
+
+.login form, .signup form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 5vh;
+}
+
+.login-signup label {
+  margin: 5vh;
+}
+
+.login-signup p{
+  text-align: center;
+}
+
+.login-signup input {
+  margin-left: 3vh;
+}
+
+.add-product form{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 5vh;
+}
+
+.add-product label {
+  padding: 2vh;
+}
+
+.navbar img {
+  height: 15vh;
+}
+
+.navbar {
+  margin: 1.5vh;
+}
+
+.navbar {
+  display: flex;
+  justify-content: space-around;
+}
+
+.searchbar input{
+  width: 50vh;
+}
+
+.product-list {
+  margin: 5vh;
+}
+
+.product-list ul{
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+}
+
+.product-list img {
+  width: 200px;
+  height: 200px;
+  object-fit: cover;
+}

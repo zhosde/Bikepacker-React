@@ -8,8 +8,7 @@ class ProductList extends Component {
   }
   render() {
     return (
-      <div>
-        PRODUCT LIST
+      <div className='product-list'>
         <ul>
           {this.props.products.map((product) => {
             return (

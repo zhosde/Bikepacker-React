@@ -1,6 +1,8 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import authService from "./auth/auth-service";
+import authService from "./auth-service";
+import Login from "./Login";
+import Signup from "./Signup";
 
 class UserProfile extends React.Component {
   logoutUser = () => {
@@ -11,7 +13,7 @@ class UserProfile extends React.Component {
 
   render() {
     const { userData, userIsLoggedIn } = this.props;
-
+    console.log(this.props)
     if (userIsLoggedIn) {
       return (
         <nav className="nav-style">
@@ -24,14 +26,15 @@ class UserProfile extends React.Component {
             </li>
             <li>
               <Link to="/">
-                <button type='submit' onClick={() => this.logoutUser()}>Logout</button>
+                <button type="submit" onClick={() => this.logoutUser()}>
+                  Logout
+                </button>
               </Link>
             </li>
           </ul>
         </nav>
       );
-    } 
-    else if (userIsLoggedIn && userData.isAdmin) {
+    } if (userIsLoggedIn && userData.isAdmin) {
       return (
         <nav className="nav-style">
           <ul>
@@ -58,21 +61,9 @@ class UserProfile extends React.Component {
       );
     } else {
       return (
-        <div>
-          <nav className="nav-style">
-            <ul>
-              <li>
-                <Link to="/login" style={{ textDecoration: "none" }}>
-                  Login
-                </Link>
-              </li>
-              <li>
-                <Link to="/signup" style={{ textDecoration: "none" }}>
-                  Signup
-                </Link>
-              </li>
-            </ul>
-          </nav>
+        <div className="login-signup">
+          <Login />
+          <Signup />
         </div>
       );
     }
