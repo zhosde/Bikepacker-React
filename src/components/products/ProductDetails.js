@@ -2,13 +2,13 @@ import React, { Component } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import EditProduct from "./EditProduct"
-import Navbar from "../Navbar";
+import Navbar from "../SearchBar";
 import Cart from "../Cart"
 
 class ProductDetails extends Component {
   state = {
     numOfProduct: 0,
-    numOfProductInCart: 0,
+    numOfProductInCart: 0, // length of array
     productInCart: [],
   };
 

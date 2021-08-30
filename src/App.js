@@ -11,6 +11,7 @@ import authService from "./components/auth/auth-service";
 import Login from "./components/auth/Login";
 import AddProduct from "./components/products/AddProduct";
 import About from "./components/About";
+import NavBar from "./components/NavBar";
 
 class App extends Component {
   state = {
@@ -69,7 +70,15 @@ class App extends Component {
       <div className="App">
         <Switch>
           <Route exact path="/" component={HomePage}></Route>
+          <Route
+            exact
+            path="/about"
+            render={(props) => {
+              return <About />;
+            }}
+          />
           <div>
+            <NavBar />
             <Route
               exact
               path="/profile"
@@ -92,7 +101,7 @@ class App extends Component {
                 return <Main {...props} products={this.state.listOfProducts} />;
               }}
             ></Route>
-            <Route
+            {/* <Route
               exact
               path="/profile"
               render={(props) => {
@@ -105,7 +114,7 @@ class App extends Component {
               render={(props) => {
                 return <Signup {...props} getUser={this.getTheUser} />;
               }}
-            />
+            /> */}
             <Route
               exact
               path="/products"
@@ -135,13 +144,6 @@ class App extends Component {
                     user={this.state.user}
                   />
                 );
-              }}
-            />
-            <Route
-              exact
-              path="/about"
-              render={(props) => {
-                return <About />;
               }}
             />
           </div>

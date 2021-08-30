@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import ProductList from "./products/ProductList";
-import Navbar from "./Navbar";
+import SearchBar from "./SearchBar";
 
 class Main extends Component {
   state = {
@@ -31,7 +31,7 @@ class Main extends Component {
     return (
       <main>
         <div>
-          <Navbar SearchTheProduct={this.SearchTheProduct} />
+          <SearchBar SearchTheProduct={this.SearchTheProduct} />
           <hr className="hr-line" />
         </div>
         <div>
