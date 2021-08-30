@@ -18,6 +18,7 @@ class App extends Component {
     isLoggedIn: false,
     user: null,
     listOfProducts: [],
+    productsInCart: [],
   };
 
   getAllProducts = () => {
@@ -25,6 +26,16 @@ class App extends Component {
       withCredentials: true,
     });
   };
+
+  handleAddToCart = (selectedProduct) => {
+    this.setState((prevState) => {
+      const productInCartCopy = [...prevState.productsInCart];
+      productInCartCopy.push(selectedProduct);
+      return {
+        productsInCart: productInCartCopy,
+      };
+    });
+  }
 
   getTheUser = (userObj, loggedIn) => {
     this.setState({
@@ -78,7 +89,7 @@ class App extends Component {
             }}
           />
           <div>
-            <NavBar />
+            <NavBar numOfProductsInCart={this.state.productsInCart.length} />
             <Route
               exact
               path="/profile"
@@ -139,7 +150,8 @@ class App extends Component {
                 );
                 return (
                   <ProductDetails
-                    {...requestedProduct}
+                    addToCart={this.handleAddToCart}
+                    requestedProduct={requestedProduct}
                     {...routeProps}
                     user={this.state.user}
                   />

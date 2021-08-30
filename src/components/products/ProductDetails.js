@@ -1,34 +1,13 @@
 import React, { Component } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
-import EditProduct from "./EditProduct"
+import EditProduct from "./EditProduct";
 import Navbar from "../SearchBar";
-import Cart from "../Cart"
+import Cart from "../Cart";
 
 class ProductDetails extends Component {
-  state = {
-    numOfProduct: 0,
-    numOfProductInCart: 0, // length of array
-    productInCart: [],
-  };
-
-  getSingleProduct = () => {
-    const { id } = this.props._id;
-    axios
-      .get(`http://localhost:5000/api/products/${id}`, {
-        withCredentials: true,
-      })
-      .then((responseFromApi) => {
-        const theProduct = responseFromApi.data;
-        // this.setState(theProduct);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
-
   renderEditForm = () => {
-    if (this.props.name) {
+    if (this.props.requestedProduct.name) {
       return (
         <EditProduct
           theProduct={this.props}
@@ -53,28 +32,19 @@ class ProductDetails extends Component {
       });
   };
 
-  addToCartBtn = (event) => {
+  handleToCartBtn = (event) => {
     event.preventDefault();
-    const cartItem = [{ productID: this.props._id, qty: this.props.qty }];
-    this.setState((prevState) => {
-      return {
-        numOfProductInCart: prevState.numOfProductInCart + 1,
-        productInCart: prevState.productInCart.push(cartItem),
-      };
-    });
-    return (
-      <Cart
-        productInCart={this.state.productInCart}
-        numOfProduct={this.state.numOfProduct}
-        user = {this.props.user}
-      />
-    );
-  };
+//    const cartItem = [{ productID: this.props._id, qty: this.props.qty }];
+    this.props.addToCart(this.props.requestedProduct);
 
-  handleChangeQty = (event) => {
-    this.setState({
-      numOfProduct: event.target.value,
-    });
+
+    // return (
+    //   <Cart
+    //     productInCart={this.state.productInCart}
+    //     numOfProduct={this.state.numOfProduct}
+    //     user = {this.props.user}
+    //   />
+    // );
   };
 
   ownershipCheck = () => {
@@ -86,7 +56,7 @@ class ProductDetails extends Component {
           <div>
             <button
               className="delete-btn"
-              onClick={() => this.deleteProduct(this.props._id)}
+              onClick={() => this.deleteProduct(this.props.requestedProduct._id)}
             >
               Delete product
             </button>
@@ -101,30 +71,24 @@ class ProductDetails extends Component {
       <>
         <Navbar />
         <hr className="hr-line" />
-        <div className="product-detail">
-          <div>
-            <img src={this.props.image} />
+        {this.props.requestedProduct && (
+          <div className="product-detail">
+            <div>
+              <img src={this.props.requestedProduct.image} />
+            </div>
+            <div className="product-info">
+              <h1>{this.props.requestedProduct.name}</h1>
+              <p>{this.props.requestedProduct.price} €</p>
+
+              <br />
+              <button onClick={this.handleToCartBtn}>Add In Cart</button>
+              <br />
+              <Link to={"/shop"}>Back to products</Link>
+              <hr />
+              <p>{this.props.requestedProduct.description}</p>
+            </div>
           </div>
-          <div className="product-info">
-            <h1>{this.props.name}</h1>
-            <p>{this.props.price} €</p>
-            <label>
-              Qty:
-              <input
-                type="number"
-                name="qty"
-                value={this.state.numOfProduct}
-                onChange={(e) => this.handleChangeQty(e)}
-              />
-            </label>
-            <br />
-            <button onClick={this.addToCartBtn}>Add In Cart</button>
-            <br />
-            <Link to={"/shop"}>Back to products</Link>
-            <hr />
-            <p>{this.props.description}</p>
-          </div>
-        </div>
+        )}
         <div> {this.ownershipCheck()} </div>
       </>
     );

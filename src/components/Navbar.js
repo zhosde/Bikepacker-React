@@ -27,7 +27,7 @@ class NavBar extends Component {
 
         <div className="navbar-icon">
           <Link to="/cart" style={linkStyle}>
-            <img src={cart} alt="cart icon" />
+            <img src={cart} alt="cart icon" /> ({this.props.numOfProductsInCart})
           </Link>
         </div>
 
