@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import EditProduct from "./EditProduct";
-import Navbar from "../SearchBar";
 import Cart from "../Cart";
 
 class ProductDetails extends Component {
@@ -59,7 +58,6 @@ class ProductDetails extends Component {
   render() {
     return (
       <>
-        <Navbar />
         <hr className="hr-line" />
         {this.props.requestedProduct && (
           <div className="product-detail">

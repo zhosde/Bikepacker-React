@@ -5,7 +5,7 @@ import heart from "../assets/heart.png";
 import profile from "../assets/profile.png";
 import cart from "../assets/cart.png";
 
-class NavBar extends Component {
+class Nav extends Component {
   render() {
     const linkStyle = {
       color: "black",
@@ -47,4 +47,4 @@ class NavBar extends Component {
   }
 }
 
-export default NavBar;
+export default Nav;

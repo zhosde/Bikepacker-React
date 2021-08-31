@@ -10,7 +10,7 @@ import Cart from "./components/Cart";
 import authService from "./components/auth/auth-service";
 import AddProduct from "./components/products/AddProduct";
 import About from "./components/About";
-import NavBar from "./components/NavBar";
+import Nav from "./components/Nav";
 
 class App extends Component {
   state = {
@@ -96,7 +96,7 @@ class App extends Component {
           <Route exact path="/" component={HomePage}></Route>
           <Route exact path="/about" component={About} />;
           <div>
-            <NavBar numOfProductsInCart={Object.keys(this.state.productsInCart).length} />
+            <Nav numOfProductsInCart={Object.keys(this.state.productsInCart).length} />
             <Route
               exact
               path="/profile"
