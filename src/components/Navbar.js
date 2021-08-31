@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { NavLink as Link } from "react-router-dom";
 import logo from "../assets/main-logo.png";
-import heart from '../assets/heart.png'
+import heart from "../assets/heart.png";
 import profile from "../assets/profile.png";
 import cart from "../assets/cart.png";
 
@@ -12,31 +12,37 @@ class NavBar extends Component {
     };
 
     return (
-      <div className="navbar">
-        <Link to="/">
+      <>
+        <div className="navbar">
           <div>
-            <img id="logo" src={logo} alt="logo" />
+            <Link to="/">
+              <img id="logo" src={logo} alt="logo" />
+            </Link>
           </div>
-        </Link>
 
-        <div className="navbar-icon">
-          <Link to="/profile" style={linkStyle}>
-            <img src={profile} alt="profile icon" />
-          </Link>
-        </div>
+          <div className="navbar-icon">
+            <div>
+              <Link to="/profile" style={linkStyle}>
+                <img id="profile-icon" src={profile} alt="profile icon" />
+              </Link>
+            </div>
 
-        <div className="navbar-icon">
-          <Link to="/cart" style={linkStyle}>
-            <img src={cart} alt="cart icon" /> ({this.props.numOfProductsInCart})
-          </Link>
-        </div>
+            <div>
+              <Link to="/cart" style={linkStyle}>
+                <img src={cart} alt="cart icon" /> (
+                {this.props.numOfProductsInCart})
+              </Link>
+            </div>
 
-        <div className="navbar-icon">
-          <Link to="/profile" style={linkStyle}>
-            <img src={heart} alt="heart icon" />
-          </Link>
+            <div>
+              <Link to="/profile" style={linkStyle}>
+                <img src={heart} alt="heart icon" />
+              </Link>
+            </div>
+            
+          </div>
         </div>
-      </div>
+      </>
     );
   }
 }

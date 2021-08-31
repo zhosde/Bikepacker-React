@@ -34,17 +34,7 @@ class ProductDetails extends Component {
 
   handleToCartBtn = (event) => {
     event.preventDefault();
-//    const cartItem = [{ productID: this.props._id, qty: this.props.qty }];
     this.props.addToCart(this.props.requestedProduct);
-
-
-    // return (
-    //   <Cart
-    //     productInCart={this.state.productInCart}
-    //     numOfProduct={this.state.numOfProduct}
-    //     user = {this.props.user}
-    //   />
-    // );
   };
 
   ownershipCheck = () => {

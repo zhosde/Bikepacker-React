@@ -6,9 +6,8 @@ import HomePage from "./components/HomePage";
 import Main from "./components/Main";
 import UserProfile from "./components/auth/UserProfile";
 import ProductDetails from "./components/products/ProductDetails";
-import Signup from "./components/auth/Signup";
+import Cart from "./components/Cart";
 import authService from "./components/auth/auth-service";
-import Login from "./components/auth/Login";
 import AddProduct from "./components/products/AddProduct";
 import About from "./components/About";
 import NavBar from "./components/NavBar";
@@ -18,7 +17,7 @@ class App extends Component {
     isLoggedIn: false,
     user: null,
     listOfProducts: [],
-    productsInCart: [],
+    productsInCart: {},
   };
 
   getAllProducts = () => {
@@ -29,12 +28,26 @@ class App extends Component {
 
   handleAddToCart = (selectedProduct) => {
     this.setState((prevState) => {
-      const productInCartCopy = [...prevState.productsInCart];
-      productInCartCopy.push(selectedProduct);
+      // count and record the qty of product in cart dynamically
+      // if the id exists => 0+1, if id exists => +1
+      prevState.productsInCart[selectedProduct._id] =
+        (prevState.productsInCart[selectedProduct._id] || 0) + 1;      
+
       return {
-        productsInCart: productInCartCopy,
+        productsInCart: prevState.productsInCart,
       };
     });
+  };
+
+  handleQtyChange = (event, productId) => {
+    // turn obj into str
+    const productQtyCopy = JSON.parse(
+      JSON.stringify(this.state.productsInCart)
+    );
+    productQtyCopy[productId] = event.targt.value
+    this.setState({
+      productsInCart: productQtyCopy
+    })
   }
 
   getTheUser = (userObj, loggedIn) => {
@@ -81,15 +94,9 @@ class App extends Component {
       <div className="App">
         <Switch>
           <Route exact path="/" component={HomePage}></Route>
-          <Route
-            exact
-            path="/about"
-            render={(props) => {
-              return <About />;
-            }}
-          />
+          <Route exact path="/about" component={About} />;
           <div>
-            <NavBar numOfProductsInCart={this.state.productsInCart.length} />
+            <NavBar numOfProductsInCart={Object.keys(this.state.productsInCart).length} />
             <Route
               exact
               path="/profile"
@@ -107,28 +114,29 @@ class App extends Component {
             ></Route>
             <Route
               exact
+              path="/cart"
+              render={(props) => {
+                return (
+                  <Cart
+                    {...props}
+                    handleQtyChange={this.handleQtyChange}
+                    productsInCart={this.state.productsInCart}
+                    listOfProducts={this.state.listOfProducts}
+                    user={this.state.user}
+                  />
+                );
+              }}
+            ></Route>
+            <Route
+              exact
               path="/shop"
               render={(props) => {
                 return <Main {...props} products={this.state.listOfProducts} />;
               }}
             ></Route>
-            {/* <Route
-              exact
-              path="/profile"
-              render={(props) => {
-                return <Login {...props} getUser={this.getTheUser} />;
-              }}
-            />
             <Route
               exact
-              path="/profile"
-              render={(props) => {
-                return <Signup {...props} getUser={this.getTheUser} />;
-              }}
-            /> */}
-            <Route
-              exact
-              path="/products"
+              path="/addproduct"
               render={(props) => {
                 return (
                   <AddProduct

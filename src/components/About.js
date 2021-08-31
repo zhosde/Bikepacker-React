@@ -32,9 +32,9 @@ class About extends Component {
               }}
             >
               <span style={{ marginLeft: "10vh" }}>
-                <Link to="/">
+                <Link to="/shop">
                   <i>
-                    Time to open my bunker...
+                    Time to get my stash...
                     <br />
                     Keep calm and go shopping...
                   </i>

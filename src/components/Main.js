@@ -32,8 +32,8 @@ class Main extends Component {
       <main>
         <div>
           <SearchBar SearchTheProduct={this.SearchTheProduct} />
-          <hr className="hr-line" />
         </div>
+        <hr className="hr-line" />
         <div>
           <ProductList products={filteredProducts} />
         </div>

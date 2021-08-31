@@ -5,6 +5,7 @@ import Login from "./Login";
 import Signup from "./Signup";
 
 class UserProfile extends React.Component {
+
   logoutUser = () => {
     authService.logout().then(() => {
       this.props.getUser(null, false);
@@ -24,31 +25,16 @@ class UserProfile extends React.Component {
                 Products
               </Link>
             </li>
-            <li>
-              <Link to="/">
-                <button type="submit" onClick={() => this.logoutUser()}>
-                  Logout
-                </button>
-              </Link>
-            </li>
-          </ul>
-        </nav>
-      );
-    } if (userIsLoggedIn && userData.isAdmin) {
-      return (
-        <nav className="nav-style">
-          <ul>
-            {userIsLoggedIn && <li>Welcome, {userData.username} </li>}
-            <li>
-              <Link to="/shop" style={{ textDecoration: "none" }}>
-                Products
-              </Link>
-            </li>
-            <li>
-              <Link to="/products" style={{ textDecoration: "none" }}>
-                Add Product
-              </Link>
-            </li>
+
+            {/* only admin can add product */}
+            {userData.isAdmin && (
+              <li>
+                <Link to="/addproduct" style={{ textDecoration: "none" }}>
+                  Add Product
+                </Link>
+              </li>
+            )}
+
             <li>
               <Link to="/">
                 <button type="submit" onClick={() => this.logoutUser()}>
@@ -62,8 +48,8 @@ class UserProfile extends React.Component {
     } else {
       return (
         <div className="login-signup">
-          <Login />
-          <Signup />
+          <Login  getUser={this.props.getUser}/>
+          <Signup getUser={this.props.getUser}/>
         </div>
       );
     }

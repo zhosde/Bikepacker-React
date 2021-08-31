@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { NavLink as Link } from "react-router-dom";
 
-
 class SearchBar extends Component {
   state = {
     searchWord: "",
@@ -15,6 +14,22 @@ class SearchBar extends Component {
 
   render() {
     return (
+      <section className="sec-nav">
+        {/* <div className="category-links">
+          <div>
+            <Link to="/shop">Gear</Link>
+          </div>
+          <div>
+            <Link to="/shop">Electronics</Link>
+          </div>
+          <div>
+            <Link to="/shop">HOT</Link>
+          </div>
+          <div>
+            <Link to="/shop">%</Link>
+          </div>
+        </div> */}
+
         <div className="searchbar">
           <input
             type="search"
@@ -24,6 +39,7 @@ class SearchBar extends Component {
             onChange={this.handleSearch}
           ></input>
         </div>
+      </section>
     );
   }
 }

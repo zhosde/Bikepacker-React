@@ -2,65 +2,83 @@ import React from "react";
 import axios from "axios";
 import Order from "./Order";
 import {Link} from 'react-router-dom'
+import UserProfile from "./auth/UserProfile";
 
 class Cart extends React.Component {
-  state = {
-    productInCart: this.props.productInCart,
-    numOfProduct: this.props.numOfProduct,
-  };
 
   handleFormSubmit = (event) => {
     event.preventDefault();
+  
+    if (this.props.user !== null) {
+      const orderedItem = [this.props.productsInCart];
+      const userId = this.props.user._id;
 
-    const productInCart = this.state.productInCart;
-    const numOfProduct = this.state.numOfProduct;
-    const userId = this.props.user.id;
+      return axios
+        .post(`http://localhost:5000/api/orders`, { orderedItem, userId })
+        .then((orderFromDB) => {
+          return <UserProfile theOrder={orderFromDB} />;
+        });
+    }
+    // if user not login, redirect to profile page to login/signup
+    else {
+      this.props.history.push("/profile");
+    }
+  };  
 
-    axios
-      .post(`http://localhost:5000/api/orders`, { productInCart, userId })
-      .then((orderFromDB) => {
-        return <Order theOrder={orderFromDB} />;
-      });
-  };
+  handleChange = (event) => {
+      event.preventDefault();
+      this.props.handleChangeQty(event, this.props.productsInCart._id)
+  }
 
-  handleChangeQty = (event) => {
-    this.setState({
-      numOfProduct: event.target.value,
+  getProductDetails = (productId) => {
+    const productObj = this.props.listOfProducts.find((product) => {
+      return product._id === productId;
     });
+    return (
+      <div className="cart-list">
+        <ul>
+          <li key={productObj._id}>
+            <Link to={`/products/${productObj._id}`}>
+              <img src={productObj.image} />
+              <h3>{productObj.name}</h3>
+            </Link>
+
+            <label>
+              Qty:
+              <input
+                type="number"
+                name="qty"
+                value={this.props.productsInCart[productId]}
+                onChange={(e) => this.handleChange}
+              />
+            </label>
+            <p>{productObj.price}</p>
+          </li>
+        </ul>
+      </div>
+    );
   };
 
   render() {
     return (
       <>
-        {this.state.productInCart.map((product) => {
-          return (
-            <li key={product._id}>
-              <Link to={`/products/${product._id}`}>
-                <img src={product.image} />
-                <h3>{product.name}</h3>
-                <p>{product.price}</p>
-              </Link>
-            </li>
-          );
-        })}
+        {Object.keys(this.props.productsInCart).length !== 0 ? 
+          <div className="order-form">
+            {Object.keys(this.props.productsInCart).map((productId) => {
+              console.log(Object.values(this.props.productsInCart));
+              return this.getProductDetails(productId);
+            })}
 
-        <form onSubmit={this.handleFormSubmit}>
-          <label>Qty: </label>
-          <input
-            type="number"
-            name="qty"
-            value={this.state.numOfProduct}
-            onChange={(e) => this.handleChangeQty(e)}
-          />
-          {/* <label>{this.state.numOfProduct*product.price}</label> */}
+            <label>Total Price: </label>
 
-          <label>Total Price: </label>
-
-          <input type="submit" value="Submit" />
-        </form>
+            <form onSubmit={this.handleFormSubmit}>
+              <input type="submit" value="Submit" />
+            </form>
+          </div>
+        
+       : <h1>Currently no product in cart </h1>}
       </>
-    );
-  }
+    );}
 }
 
 export default Cart;
