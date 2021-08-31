@@ -2,20 +2,20 @@ import React, { Component } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import EditProduct from "./EditProduct";
-import Cart from "../Cart";
+
 
 class ProductDetails extends Component {
+
   renderEditForm = () => {
-    if (this.props.requestedProduct.name) {
-      return (
-        <EditProduct
-          theProduct={this.props}
-          getTheProduct={this.getSingleProduct}
-          {...this.props}
-        />
-      );
-    }
-  };
+    // if (this.props.requestedProduct.name {
+    return (
+      <EditProduct
+        theProduct={this.props.requestedProduct}
+        {...this.props}
+      />
+    );
+  // }
+};
 
   deleteProduct = () => {
     const { params } = this.props.match;
@@ -45,7 +45,9 @@ class ProductDetails extends Component {
           <div>
             <button
               className="delete-btn"
-              onClick={() => this.deleteProduct(this.props.requestedProduct._id)}
+              onClick={() =>
+                this.deleteProduct(this.props.requestedProduct._id)
+              }
             >
               Delete product
             </button>

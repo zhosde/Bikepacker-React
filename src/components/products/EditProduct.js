@@ -8,7 +8,26 @@ class EditProduct extends Component {
     category: this.props.theProduct.category,
     image: this.props.theProduct.image,
     price: this.props.theProduct.price,
-    stocked: this.props.theProduct.stocked
+    stocked: this.props.theProduct.stocked,
+  };
+
+  componentDidMount() {
+    this.getSingleProduct();
+  }
+
+  getSingleProduct = () => {
+    const { params } = this.props.match;
+    axios
+      .get(`http://localhost:5000/api/products/${params.id}`, {
+        withCredentials: true,
+      })
+      .then((responseFromApi) => {
+        const theProduct = responseFromApi.data;
+        this.setState(theProduct);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
 
   handleFormSubmit = (event) => {
@@ -29,19 +48,19 @@ class EditProduct extends Component {
       )
       .then(() => {
         // Use the passed down api call to render the updated product data
-        this.props.getTheProduct();
+        this.getSingleProduct();
       })
       .catch((error) => console.log(error));
   };
 
   handleChange = (event) => {
-      const {name, value} = event.target;
-    this.setState({[name]: value });
+    const { name, value } = event.target;
+    this.setState({ [name]: value });
   };
 
   render() {
     return (
-      <div className='edit-form'>
+      <div className="edit-form">
         <hr />
         <h1>Edit</h1>
         <form onSubmit={this.handleFormSubmit}>
