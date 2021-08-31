@@ -18,7 +18,7 @@ class EditProduct extends Component {
   getSingleProduct = () => {
     const { params } = this.props.match;
     axios
-      .get(`http://localhost:5000/api/products/${params.id}`, {
+      .get(`${process.env.REACT_APP_API_URL}/products/${params.id}`, {
         withCredentials: true,
       })
       .then((responseFromApi) => {
@@ -42,7 +42,7 @@ class EditProduct extends Component {
 
     axios
       .put(
-        `http://localhost:5000/api/products/${this.props.theProduct._id}`,
+        `${process.env.REACT_APP_API_URL}/products/${this.props.theProduct._id}`,
         { name, description, category, image, price, stocked },
         { withCredentials: true }
       )

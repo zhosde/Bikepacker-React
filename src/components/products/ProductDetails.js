@@ -20,7 +20,7 @@ class ProductDetails extends Component {
   deleteProduct = () => {
     const { params } = this.props.match;
     axios
-      .delete(`http://localhost:5000/api/products/${params.id}`, {
+      .delete(`${process.env.REACT_APP_API_URL}/products/${params.id}`, {
         withCredentials: true,
       })
       .then(() => {

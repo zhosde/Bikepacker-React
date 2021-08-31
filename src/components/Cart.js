@@ -14,7 +14,16 @@ class Cart extends React.Component {
       const userId = this.props.user._id;
 
       return axios
-        .post(`http://localhost:5000/api/orders`, { orderedItem, userId })
+        .post(
+          `${process.env.REACT_APP_API_URL}/orders`,
+          {
+            orderedItem,
+            userId,
+          },
+          {
+            withCredentials: true,
+          }
+        )
         .then((orderFromDB) => {
           return <UserProfile theOrder={orderFromDB} />;
         });
