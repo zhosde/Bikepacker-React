@@ -229,3 +229,16 @@
   padding: 2vh;
   margin-left: 60%;
 }
+
+.profile {
+  margin: 5%;
+  font-size: 20px;
+}
+
+.profile ul {
+  display: flex;
+}
+
+.profile li {
+  margin: 5%;
+}

@@ -3,12 +3,6 @@ import axios from "axios";
 
 class EditProduct extends Component {
   state = {
-    name: this.props.theProduct.name,
-    description: this.props.theProduct.description,
-    category: this.props.theProduct.category,
-    image: this.props.theProduct.image,
-    price: this.props.theProduct.price,
-    stocked: this.props.theProduct.stocked,
   };
 
   componentDidMount() {

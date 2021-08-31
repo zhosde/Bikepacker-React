@@ -17,14 +17,20 @@ class UserProfile extends React.Component {
     console.log(this.props)
     if (userIsLoggedIn) {
       return (
-        <nav className="nav-style">
+        <section className="profile">
           <ul>
             {userIsLoggedIn && <li>Welcome, {userData.username} </li>}
             <li>
               <Link to="/shop" style={{ textDecoration: "none" }}>
-                Products
+                Back To Products
               </Link>
             </li>
+
+            {/* <li>
+              <Link to="/shop" style={{ textDecoration: "none" }}>
+                My Orders
+              </Link>
+            </li> */}
 
             {/* only admin can add product */}
             {userData.isAdmin && (
@@ -43,7 +49,7 @@ class UserProfile extends React.Component {
               </Link>
             </li>
           </ul>
-        </nav>
+        </section>
       );
     } else {
       return (
