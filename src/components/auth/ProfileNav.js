@@ -49,7 +49,12 @@ class ProfileNav extends React.Component {
         </section>
       );
     } else {
-      return <></>;
+      return (
+        <div className="login-signup">
+          <Login getUser={this.props.getUser} />
+          <Signup getUser={this.props.getUser} />
+        </div>
+      );
     }
   }
 }
