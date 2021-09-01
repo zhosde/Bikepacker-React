@@ -1,6 +1,8 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import authService from "./auth-service";
+import Login from "./Login";
+import Signup from "./Signup";
 
 class ProfileNav extends React.Component {
 
