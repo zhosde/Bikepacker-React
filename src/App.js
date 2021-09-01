@@ -4,7 +4,9 @@ import "./App.css";
 import axios from "axios";
 import HomePage from "./components/HomePage";
 import Main from "./components/Main";
-import UserProfile from "./components/auth/UserProfile";
+import ProfileNav from "./components/auth/ProfileNav";
+import OrderList from "./components/auth/OrderList";
+import OrderDetails from "./components/auth/OrderDetails";
 import ProductDetails from "./components/products/ProductDetails";
 import Cart from "./components/Cart";
 import authService from "./components/auth/auth-service";
@@ -31,7 +33,7 @@ class App extends Component {
       // count and record the qty of product in cart dynamically
       // if the id exists => 0+1, if id exists => +1
       prevState.productsInCart[selectedProduct._id] =
-        (prevState.productsInCart[selectedProduct._id] || 0) + 1;      
+        (prevState.productsInCart[selectedProduct._id] || 0) + 1;
 
       return {
         productsInCart: prevState.productsInCart,
@@ -42,11 +44,11 @@ class App extends Component {
   handleQtyChange = (event, productId) => {
     // copy the object
     const productQtyCopy = Object.assign({}, this.state.productsInCart);
-    productQtyCopy[productId] = parseInt(event.target.value)
+    productQtyCopy[productId] = parseInt(event.target.value);
     this.setState({
-      productsInCart: productQtyCopy
-    })
-  }
+      productsInCart: productQtyCopy,
+    });
+  };
 
   getTheUser = (userObj, loggedIn) => {
     this.setState({
@@ -94,18 +96,67 @@ class App extends Component {
           <Route exact path="/" component={HomePage}></Route>
           <Route exact path="/about" component={About} />;
           <div>
-            <Nav numOfProductsInCart={Object.keys(this.state.productsInCart).length} />
+            <Nav
+              numOfProductsInCart={
+                Object.keys(this.state.productsInCart).length
+              }
+            />
             <Route
+              exact
               path="/profile"
               render={(props) => {
                 return (
-                  <UserProfile
-                    {...props}
-                    userData={this.state.user}
-                    userIsLoggedIn={this.state.isLoggedIn}
-                    getUser={this.getTheUser}
-                    products={this.state.listOfProducts}
-                  />
+                    <ProfileNav
+                      {...props}
+                      userData={this.state.user}
+                      userIsLoggedIn={this.state.isLoggedIn}
+                      getUser={this.getTheUser}
+                    />
+                );
+              }}
+            ></Route>
+            <Route
+              path="/profile/orders/:id"
+              render={(props) => {
+                return (
+                  <>
+                    <ProfileNav
+                      {...props}
+                      userData={this.state.user}
+                      userIsLoggedIn={this.state.isLoggedIn}
+                      getUser={this.getTheUser}
+                    />
+                    <OrderDetails
+                      {...props}
+                      userData={this.state.user}
+                      userIsLoggedIn={this.state.isLoggedIn}
+                      getUser={this.getTheUser}
+                      products={this.state.listOfProducts}
+                    />
+                  </>
+                );
+              }}
+            ></Route>
+            <Route
+              exact
+              path="/profile/orders"
+              render={(props) => {
+                return (
+                  <>
+                    <ProfileNav
+                      {...props}
+                      userData={this.state.user}
+                      userIsLoggedIn={this.state.isLoggedIn}
+                      getUser={this.getTheUser}
+                    />
+                    <OrderList
+                      {...props}
+                      userData={this.state.user}
+                      userIsLoggedIn={this.state.isLoggedIn}
+                      getUser={this.getTheUser}
+                      products={this.state.listOfProducts}
+                    />
+                  </>
                 );
               }}
             ></Route>

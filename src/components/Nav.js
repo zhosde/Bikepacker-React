@@ -39,7 +39,6 @@ class Nav extends Component {
                 <img src={heart} alt="heart icon" />
               </Link>
             </div>
-            
           </div>
         </div>
       </>

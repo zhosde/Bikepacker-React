@@ -164,7 +164,6 @@
   text-align: center;
 }
 
-
 .product-list li {
   margin-left: 2vh;
 }
@@ -227,15 +226,22 @@
   margin-left: 60%;
 }
 
-.profile {
+/* profile page */
+
+.profile-nav {
   margin: 5%;
   font-size: 20px;
 }
 
-.profile ul {
+.profile-nav ul, .order-list ul {
   display: flex;
 }
 
-.profile li {
+.profile-nav li, .order-list li, .order-detail li {
   margin: 5%;
 }
+
+.order-list, .order-detail {
+  margin-left:40%;
+}
+
