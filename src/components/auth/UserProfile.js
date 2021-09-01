@@ -3,14 +3,42 @@ import { Link } from "react-router-dom";
 import authService from "./auth-service";
 import Login from "./Login";
 import Signup from "./Signup";
+import axios from 'axios'
 
 class UserProfile extends React.Component {
+
+  state = {
+    showOrderList: false,
+  }
+
+  onLinkClick = () => {
+    this.setState({
+      showOrderList: true
+    })
+  }
 
   logoutUser = () => {
     authService.logout().then(() => {
       this.props.getUser(null, false);
     });
   };
+
+  // renderOrderList = () => {
+  //    const { params } = this.props.match;
+  //  return axios
+  //    .get(`${process.env.REACT_APP_API_URI}/orders/${params.id}`, {
+  //      withCredentials: true,
+  //    })
+  //    .then((orders) => {
+  //      return 
+  //      <div>
+  //         {orders}
+  //      </div>
+  //    })
+  //    .catch((err) => {
+  //      console.log(`Error while render order list: `, err);
+  //    });
+  // }
 
   render() {
     const { userData, userIsLoggedIn } = this.props;
@@ -27,7 +55,7 @@ class UserProfile extends React.Component {
             </li>
 
             {/* <li>
-              <Link to="/shop" style={{ textDecoration: "none" }}>
+              <Link to="/profile" onClick={onLinkClick} style={{ textDecoration: "none" }}>
                 My Orders
               </Link>
             </li> */}

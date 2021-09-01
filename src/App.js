@@ -40,11 +40,9 @@ class App extends Component {
   };
 
   handleQtyChange = (event, productId) => {
-    // turn obj into str
-    const productQtyCopy = JSON.parse(
-      JSON.stringify(this.state.productsInCart)
-    );
-    productQtyCopy[productId] = event.targt.value
+    // copy the object
+    const productQtyCopy = Object.assign({}, this.state.productsInCart);
+    productQtyCopy[productId] = parseInt(event.target.value)
     this.setState({
       productsInCart: productQtyCopy
     })

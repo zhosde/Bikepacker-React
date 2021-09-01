@@ -5,19 +5,20 @@ import {Link} from 'react-router-dom'
 import UserProfile from "./auth/UserProfile";
 
 class Cart extends React.Component {
-
   handleFormSubmit = (event) => {
     event.preventDefault();
-  
+
     if (this.props.user !== null) {
-      const orderedItem = [this.props.productsInCart];
+      //const orderedItem = [this.props.productsInCart];
       const userId = this.props.user._id;
+
+      
 
       return axios
         .post(
           `${process.env.REACT_APP_API_URL}/orders`,
           {
-            orderedItem,
+            items: this.props.productsInCart,
             userId,
           },
           {
@@ -32,12 +33,12 @@ class Cart extends React.Component {
     else {
       this.props.history.push("/profile");
     }
-  };  
+  };
 
-  handleChange = (event) => {
-      event.preventDefault();
-      this.props.handleChangeQty(event, this.props.productsInCart._id)
-  }
+  handleChange = (event, productId) => {
+    event.preventDefault();
+    this.props.handleQtyChange(event, productId);
+  };
 
   getProductDetails = (productId) => {
     const productObj = this.props.listOfProducts.find((product) => {
@@ -56,9 +57,10 @@ class Cart extends React.Component {
               Qty:
               <input
                 type="number"
+                min="1"
                 name="qty"
                 value={this.props.productsInCart[productId]}
-                onChange={(e) => this.handleChange}
+                onChange={(e) => this.handleChange(e, productId)}
               />
             </label>
             <p>{productObj.price}</p>
@@ -68,26 +70,40 @@ class Cart extends React.Component {
     );
   };
 
+  getTotalPrice = () => {
+    const singleProductTotalPricesArr = Object.keys(this.props.productsInCart).map(
+      (productId) => {
+        const productPrice = this.props.listOfProducts.find(
+          (product) => product._id === productId
+        ).price;
+
+        const singleProductTotalPrice =
+          productPrice * this.props.productsInCart[productId];
+        return singleProductTotalPrice;
+      }
+    );
+    return singleProductTotalPricesArr.reduce((accu,cur)=>accu+cur).toFixed(2)
+  };
+
   render() {
     return (
       <>
-        {Object.keys(this.props.productsInCart).length !== 0 ? 
+        {Object.keys(this.props.productsInCart).length !== 0 ? (
           <div className="order-form">
             {Object.keys(this.props.productsInCart).map((productId) => {
-              console.log(Object.values(this.props.productsInCart));
               return this.getProductDetails(productId);
             })}
-
-            <label>Total Price: </label>
-
+            <label>Total Price: {this.getTotalPrice()}</label>
             <form onSubmit={this.handleFormSubmit}>
               <input type="submit" value="Submit" />
             </form>
           </div>
-        
-       : <h1>Currently no product in cart </h1>}
+        ) : (
+          <h1>Currently no product in cart </h1>
+        )}
       </>
-    );}
+    );
+  }
 }
 
 export default Cart;
