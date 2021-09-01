@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { NavLink as Link } from "react-router-dom";
 import '../App.css';
-import bgCover from '../assets/tibet-namtso.jpg'
+import bgCover from "../assets/on-the-road.jpg";
 
 class HomePage extends Component {
 
