@@ -1,8 +1,6 @@
 import React from "react";
 import axios from "axios";
-import Order from "./Order";
 import {Link} from 'react-router-dom'
-import UserProfile from "./auth/UserProfile";
 
 class Cart extends React.Component {
   handleFormSubmit = (event) => {
@@ -11,10 +9,7 @@ class Cart extends React.Component {
     if (this.props.user !== null) {
       //const orderedItem = [this.props.productsInCart];
       const userId = this.props.user._id;
-
-      
-
-      return axios
+      axios
         .post(
           `${process.env.REACT_APP_API_URL}/orders`,
           {
@@ -25,8 +20,8 @@ class Cart extends React.Component {
             withCredentials: true,
           }
         )
-        .then((orderFromDB) => {
-          return <UserProfile theOrder={orderFromDB} />;
+        .then(() => {
+          this.props.history.push("/profile");
         });
     }
     // if user not login, redirect to profile page to login/signup

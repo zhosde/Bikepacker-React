@@ -96,7 +96,6 @@ class App extends Component {
           <div>
             <Nav numOfProductsInCart={Object.keys(this.state.productsInCart).length} />
             <Route
-              exact
               path="/profile"
               render={(props) => {
                 return (
