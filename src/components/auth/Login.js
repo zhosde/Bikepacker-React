@@ -37,6 +37,7 @@ class Login extends Component {
             <div className="control has-icons-left">
               <input
                 className="input is-success"
+                required
                 type="text"
                 name="username"
                 value={this.state.username}

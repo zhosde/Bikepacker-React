@@ -50,6 +50,21 @@ class App extends Component {
     });
   };
 
+  deleteProductInCart = (id) => {
+    // copy the obj
+    const productIdCopy = Object.assign({}, this.state.productsInCart)
+    // convert obj into id arr, delete filtered id, get it back to obj
+    const IdObj = Object.keys(productIdCopy).filter(key=>key!==id).reduce((obj,key)=>{
+      obj[key] = productIdCopy[key]
+      return obj
+    },{})
+    this.setState(() => {
+      return {
+        productsInCart: IdObj,
+      };
+    });
+  };
+
   getTheUser = (userObj, loggedIn) => {
     this.setState({
       user: userObj,
@@ -168,6 +183,7 @@ class App extends Component {
                 return (
                   <Cart
                     {...props}
+                    clickToDelete={this.deleteProductInCart}
                     handleQtyChange={this.handleQtyChange}
                     productsInCart={this.state.productsInCart}
                     listOfProducts={this.state.listOfProducts}

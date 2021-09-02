@@ -58,7 +58,8 @@ class Cart extends React.Component {
                 onChange={(e) => this.handleChange(e, productId)}
               />
             </label>
-            <p>{productObj.price}</p>
+            <p>{productObj.price}€</p>
+            <button onClick={()=>this.props.clickToDelete(productId)}>Delete</button>
           </li>
         </ul>
       </div>
@@ -96,7 +97,7 @@ class Cart extends React.Component {
             </form>
           </div>
         ) : (
-          <h1>Currently no product in cart </h1>
+          <div className="cart notification is-info">Currently No Product In Cart</div>
         )}
       </>
     );

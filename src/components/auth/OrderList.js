@@ -46,7 +46,11 @@ class OrderList extends React.Component {
     if (userIsLoggedIn) {
       return (
         <section className="order-list">
-          {this.renderOrderList()}
+          {this.state.listOfOrders.length !== 0 ? (
+            this.renderOrderList()
+          ) : (
+            <div className="notification is-info">Currently No Order</div>
+          )}
         </section>
       );
     } else {

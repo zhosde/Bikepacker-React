@@ -168,6 +168,11 @@ width: 15rem;
   margin-top: 1%;
 }
 
+.order-form h1 {
+  display: flex;
+  text-align: center;
+}
+
 .product-list li {
   margin-left: 2vh;
 }
@@ -243,6 +248,7 @@ width: 15rem;
 .level {
   margin: 10%;
   font-size: 20px;
+  padding: 10px;
 }
 
 .order-list li, .order-detail li {
@@ -253,3 +259,12 @@ width: 15rem;
   margin-left:52.5%;
 }
 
+.notification {
+  width:35%;
+  margin-left:-5%;
+}
+
+.cart {
+  margin-left: 30%;
+  margin-top:10%;
+}

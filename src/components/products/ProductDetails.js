@@ -81,7 +81,7 @@ class ProductDetails extends Component {
               </button>
               <br />
               <Link to={"/shop"}>Back to products</Link>
-              <hr />
+              <hr/>
               <p>{this.props.requestedProduct.description}</p>
             </div>
           </div>

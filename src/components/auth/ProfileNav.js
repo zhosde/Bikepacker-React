@@ -15,7 +15,7 @@ class ProfileNav extends React.Component {
     const { userData, userIsLoggedIn } = this.props;
     if (userIsLoggedIn) {
       return (
-        <nav className="level">
+        <nav className="level has-background-primary-light">
           {userIsLoggedIn && (
             <p className="level-item has-text-centered">
               Welcome, {userData.username}{" "}
