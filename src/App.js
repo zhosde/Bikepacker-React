@@ -57,26 +57,23 @@ class App extends Component {
     });
   };
 
-  fetchUser = () => {
+  updateState = () => {
     if (this.state.user === null) {
-      return authService.loggedin();
+      authService
+        .loggedin()
+        .then((response) => {
+          this.setState({
+            user: response,
+            isLoggedIn: true,
+          });
+        })
+        .catch((err) => {
+          this.setState({
+            user: null,
+            isLoggedIn: false,
+          });
+        });
     }
-  };
-
-  componentDidMount() {
-    this.fetchUser()
-      .then((response) => {
-        this.setState({
-          user: response,
-          isLoggedIn: true,
-        });
-      })
-      .catch((err) => {
-        this.setState({
-          user: null,
-          isLoggedIn: false,
-        });
-      });
 
     this.getAllProducts()
       .then((responseFromApi) => {
@@ -87,6 +84,10 @@ class App extends Component {
       .catch((err) => {
         console.log("error getting products: ", err);
       });
+  };
+
+  componentDidMount() {
+    this.updateState();
   }
 
   render() {
@@ -106,12 +107,12 @@ class App extends Component {
               path="/profile"
               render={(props) => {
                 return (
-                    <ProfileNav
-                      {...props}
-                      userData={this.state.user}
-                      userIsLoggedIn={this.state.isLoggedIn}
-                      getUser={this.getTheUser}
-                    />
+                  <ProfileNav
+                    {...props}
+                    userData={this.state.user}
+                    userIsLoggedIn={this.state.isLoggedIn}
+                    getUser={this.getTheUser}
+                  />
                 );
               }}
             ></Route>
@@ -189,6 +190,7 @@ class App extends Component {
                 return (
                   <AddProduct
                     {...props}
+                    updateTheState={() => this.updateState()}
                     user={this.state.user}
                     products={this.state.listOfProducts}
                   />
@@ -206,6 +208,7 @@ class App extends Component {
                 );
                 return (
                   <ProductDetails
+                    updateTheState={() => this.updateState()}
                     addToCart={this.handleAddToCart}
                     requestedProduct={requestedProduct}
                     {...routeProps}

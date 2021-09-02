@@ -62,8 +62,7 @@ handleChange = (event) => {
             </div>
           </div>
           <button className="button is-primary" type="submit">
-            {" "}
-            Signup{" "}
+            Signup
           </button>
         </form>
         {this.state.errorMessage && (

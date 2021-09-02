@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import axios from "axios";
 import service from "../../api/service"
 import {Redirect} from 'react-router-dom'
 
@@ -16,18 +15,12 @@ class AddProduct extends Component {
   handleFormSubmit = (event) => {
     event.preventDefault();
 
-    // const name = this.state.name;
-    // const description = this.state.description;
-    // const category = this.state.category;
-    // const image = this.state.image;
-    // const price = this.state.price;
-    // const stocked = this.state.stocked;
-
     service
       .saveNewProduct(this.state)
       .then((res) => {
         console.log("added new product: ", res);
-        return <Redirect to="/shop" />;
+        this.props.updateTheState();
+        this.props.history.push("/shop");
       })
 
       .then(() => {
@@ -38,23 +31,9 @@ class AddProduct extends Component {
           image: "",
           price: 0,
           stocked: true,
-        });
+        })
       })
       .catch((err) => console.log("Error while adding the new product: ", err));
-
-    // axios
-    //   .post(
-    //     "http://localhost:5000/api/products",
-    //     {
-    //       name,
-    //       description,
-    //       category,
-    //       image,
-    //       price,
-    //       stocked,
-    //     },
-    //     { withCredentials: true }
-    //   )
   };
 
   handleChange = (event) => {

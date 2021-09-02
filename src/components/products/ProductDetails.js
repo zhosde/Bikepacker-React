@@ -10,6 +10,7 @@ class ProductDetails extends Component {
     // if (this.props.requestedProduct.name {
     return (
       <EditProduct
+        updateThestate={this.props.updateTheState()}
         theProduct={this.props.requestedProduct}
         {...this.props}
       />
@@ -24,6 +25,7 @@ class ProductDetails extends Component {
         withCredentials: true,
       })
       .then(() => {
+        this.props.updateTheState();
         this.props.history.push("/shop");
       })
       .catch((err) => {

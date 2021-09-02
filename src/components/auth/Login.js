@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import authService from "./auth-service";
 
 class Login extends Component {
-  state = { username: "", password: "", errorMessage:'' };
+  state = { username: "", password: "", errorMessage: "" };
 
   handleFormSubmit = (event) => {
     event.preventDefault();
@@ -16,9 +16,10 @@ class Login extends Component {
       })
       .catch((error) => {
         this.setState({
-          errorMessage: 'Either username or password is incorrect, please re-try'
-        })
-      })
+          errorMessage:
+            "Either username or password is incorrect, please re-try",
+        });
+      });
   };
 
   handleChange = (event) => {
@@ -47,8 +48,10 @@ class Login extends Component {
             <label className="label">Password</label>
             <div className="control">
               <input
-                className="input" required
-                type="password" required
+                className="input"
+                required
+                type="password"
+                required
                 name="password"
                 value={this.state.password}
                 onChange={this.handleChange}
@@ -56,11 +59,12 @@ class Login extends Component {
             </div>
           </div>
           <button className="button is-primary" type="submit">
-            {" "}
-            Login{" "}
+            Login
           </button>
         </form>
-        {this.state.errorMessage && <p className='err-info'>{this.state.errorMessage}</p>}
+        {this.state.errorMessage && (
+          <p className="err-info">{this.state.errorMessage}</p>
+        )}
       </div>
     );
   }

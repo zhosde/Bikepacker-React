@@ -2,8 +2,7 @@ import React, { Component } from "react";
 import axios from "axios";
 
 class EditProduct extends Component {
-  state = {
-  };
+  state = {};
 
   componentDidMount() {
     this.getSingleProduct();
@@ -41,8 +40,8 @@ class EditProduct extends Component {
         { withCredentials: true }
       )
       .then(() => {
-        // Use the passed down api call to render the updated product data
-        this.getSingleProduct();
+        // to updated product data (state in app.js)
+        this.props.updateTheState()
       })
       .catch((error) => console.log(error));
   };
@@ -99,7 +98,12 @@ class EditProduct extends Component {
             name="image"
             onChange={(e) => this.handleChange(e)}
           />
-          <input type="submit" value="Submit" />
+          <button
+            className="button is-info"
+            type="submit"
+          >
+            Submit
+          </button>
         </form>
       </div>
     );
