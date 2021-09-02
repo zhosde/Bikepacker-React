@@ -90,7 +90,9 @@ class Cart extends React.Component {
             })}
             <label>Total Price: {this.getTotalPrice()}</label>
             <form onSubmit={this.handleFormSubmit}>
-              <input type="submit" value="Submit" />
+              <button className="button is-info" type="submit">
+                Submit
+              </button>
             </form>
           </div>
         ) : (

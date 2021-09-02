@@ -164,6 +164,10 @@ width: 15rem;
   text-align: center;
 }
 
+.order-form button {
+  margin-top: 1%;
+}
+
 .product-list li {
   margin-left: 2vh;
 }
