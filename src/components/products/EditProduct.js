@@ -78,30 +78,39 @@ class EditProduct extends Component {
             value={this.state.price}
             onChange={(e) => this.handleChange(e)}
           />
-          <label>Stocked:</label>
-          <select
-            value={this.state.stocked}
-            onChange={(e) => this.handleChange(e)}
-          >
-            <option value="true">True</option>
-            <option value="false">False</option>
-          </select>
+          <div>
+            <label>Stocked:</label>
+            <select
+              value={this.state.stocked}
+              onChange={(e) => this.handleChange(e)}
+            >
+              <option value="true">True</option>
+              <option value="false">False</option>
+            </select>
+          </div>
           <label>Description:</label>
           <textarea
             name="description"
             value={this.state.description}
             onChange={(e) => this.handleChange(e)}
           />
-          <label>Image:</label>
-          <input
-            type="file"
-            name="image"
-            onChange={(e) => this.handleChange(e)}
-          />
-          <button
-            className="button is-info"
-            type="submit"
-          >
+          <div className="file is-small">
+            <label className="file-label">
+              <input
+                className="file-input"
+                type="file"
+                name="image"
+                onChange={(e) => this.handleChange(e)}
+              />
+              <span class="file-cta">
+                <span class="file-icon">
+                  <i class="fas fa-upload"></i>
+                </span>
+                <span class="file-label">Image File</span>
+              </span>
+            </label>
+          </div>
+          <button className="button is-info" type="submit">
             Submit
           </button>
         </form>

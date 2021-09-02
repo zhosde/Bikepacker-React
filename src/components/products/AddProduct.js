@@ -55,56 +55,86 @@ class AddProduct extends Component {
 
   render() {
     return (
-      <div className='add-product'>
+      <div className="add-product">
         <form onSubmit={this.handleFormSubmit}>
-          <label>Name:</label>
-          <input
-            type="text"
-            name="name"
-            value={this.state.name}
-            onChange={(e) => this.handleChange(e)}
-          />
-
-          <label>Category:</label>
-          <input
-            type="text"
-            name="category"
-            value={this.state.category}
-            onChange={(e) => this.handleChange(e)}
-          />
-
-          <label>Description:</label>
-          <textarea
-            name="description"
-            value={this.state.description}
-            onChange={(e) => this.handleChange(e)}
-          />
-
-          <label>Price:</label>
-          <input
-            type="number"
-            name="price"
-            value={this.state.price}
-            onChange={(e) => this.handleChange(e)}
-          />
-
-          <label>Stocked:</label>
-          <select
-            value={this.state.stocked}
-            onChange={(e) => this.handleChange(e)}
-          >
-            <option value="true">True</option>
-            <option value="false">False</option>
-          </select>
-
-          <label>Image:</label>
-          <input
-            type="file"
-            name="image"
-            onChange={this.handleFileUpload}
-          />
-
-          <input type="submit" value="Submit" />
+          <div className="field">
+            <label className="label">Name:</label>
+            <div className="control">
+              <input
+                className="input"
+                type="text"
+                name="name"
+                value={this.state.name}
+                onChange={(e) => this.handleChange(e)}
+              />
+            </div>
+          </div>
+          <div className="field">
+            <label className="label">Category:</label>
+            <div className="control">
+              <input
+                className="input"
+                type="text"
+                name="category"
+                value={this.state.category}
+                onChange={(e) => this.handleChange(e)}
+              />
+            </div>
+          </div>
+          <div className="field">
+            <label className="label">Description:</label>
+            <div className="control">
+              <textarea
+                className="input"
+                name="description"
+                value={this.state.description}
+                onChange={(e) => this.handleChange(e)}
+              />
+            </div>
+          </div>
+          <div className="field">
+            <label className="label">Price:</label>
+            <div className="control">
+              <input
+                className="input"
+                type="number"
+                name="price"
+                value={this.state.price}
+                onChange={(e) => this.handleChange(e)}
+              />
+            </div>
+          </div>
+          <div className="field">
+            <label className="label">Stocked:</label>
+            <div className="select is-info">
+              <select
+                value={this.state.stocked}
+                onChange={(e) => this.handleChange(e)}
+              >
+                <option value="true">True</option>
+                <option value="false">False</option>
+              </select>
+            </div>
+          </div>
+          <div className="file is-normal">
+            <label className="file-label">
+              <input
+                className="file-input"
+                type="file"
+                name="image"
+                onChange={this.handleFileUpload}
+              />
+              <span class="file-cta">
+                <span class="file-icon">
+                  <i class="fas fa-upload"></i>
+                </span>
+                <span class="file-label">Image File</span>
+              </span>
+            </label>
+          </div>
+          <button className="button is-info" type="submit">
+            Submit
+          </button>
         </form>
       </div>
     );

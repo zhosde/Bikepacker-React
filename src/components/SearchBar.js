@@ -30,14 +30,17 @@ class SearchBar extends Component {
           </div>
         </div> */}
 
-        <div className="searchbar">
-          <input
-            type="search"
-            name="search"
-            placeholder="Search..."
-            value={this.state.searchWord}
-            onChange={this.handleSearch}
-          ></input>
+        <div className="searchbar field">
+          <div className='control'>
+            <input
+            className='input'
+              type="search"
+              name="search"
+              placeholder="Search..."
+              value={this.state.searchWord}
+              onChange={this.handleSearch}
+            ></input>
+          </div>
         </div>
       </section>
     );

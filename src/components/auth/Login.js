@@ -34,21 +34,24 @@ class Login extends Component {
         <form onSubmit={this.handleFormSubmit} className="box">
           <div className="field">
             <label className="label">Username</label>
-            <div className="control">
+            <div className="control has-icons-left">
               <input
-                className="input"
+                className="input is-success"
                 type="text"
                 name="username"
                 value={this.state.username}
                 onChange={this.handleChange}
               />
+              <span className="icon is-small is-left">
+                <i className="fas fa-user"></i>
+              </span>
             </div>
           </div>
           <div className="field">
             <label className="label">Password</label>
-            <div className="control">
+            <div className="control has-icons-left">
               <input
-                className="input"
+                className="input is-success"
                 required
                 type="password"
                 required
@@ -56,6 +59,9 @@ class Login extends Component {
                 value={this.state.password}
                 onChange={this.handleChange}
               />
+              <span className="icon is-small is-left">
+                <i className="fas fa-lock"></i>
+              </span>
             </div>
           </div>
           <button className="button is-primary" type="submit">

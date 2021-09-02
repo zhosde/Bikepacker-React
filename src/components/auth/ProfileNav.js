@@ -5,7 +5,6 @@ import Login from "./Login";
 import Signup from "./Signup";
 
 class ProfileNav extends React.Component {
-
   logoutUser = () => {
     authService.logout().then(() => {
       this.props.getUser(null, false);
@@ -16,39 +15,42 @@ class ProfileNav extends React.Component {
     const { userData, userIsLoggedIn } = this.props;
     if (userIsLoggedIn) {
       return (
-        <section className="profile-nav">
-          <ul>
-            {userIsLoggedIn && <li>Welcome, {userData.username} </li>}
-            <li>
-              <Link to="/shop" style={{ textDecoration: "none" }}>
-                Back To Products
-              </Link>
-            </li>
-
-            <li>
-              <Link to="/profile/orders" style={{ textDecoration: "none" }}>
-                My Orders
-              </Link>
-            </li>
-
+        <nav className="level">
+          {userIsLoggedIn && (
+            <p className="level-item has-text-centered">
+              Welcome, {userData.username}{" "}
+            </p>
+          )}
+          <p className="level-item has-text-centered">
+            <Link to="/shop" style={{ textDecoration: "none" }}>
+              Back To Products
+            </Link>
+          </p>
+          <p className="level-item has-text-centered">
+            <Link to="/profile/orders" style={{ textDecoration: "none" }}>
+              My Orders
+            </Link>
+          </p>
+          <p className="level-item has-text-centered">
             {/* only admin can add product */}
             {userData.isAdmin && (
-              <li>
-                <Link to="/addproduct" style={{ textDecoration: "none" }}>
-                  Add Product
-                </Link>
-              </li>
-            )}
-
-            <li>
-              <Link to="/">
-                <button className="button is-normal is-info" type="submit" onClick={() => this.logoutUser()}>
-                  Logout
-                </button>
+              <Link to="/addproduct" style={{ textDecoration: "none" }}>
+                Add Product
               </Link>
-            </li>
-          </ul>
-        </section>
+            )}
+          </p>
+          <p className="level-item has-text-centered">
+            <Link to="/">
+              <button
+                className="button is-normal is-info"
+                type="submit"
+                onClick={() => this.logoutUser()}
+              >
+                Logout
+              </button>
+            </Link>
+          </p>
+        </nav>
       );
     } else {
       return (

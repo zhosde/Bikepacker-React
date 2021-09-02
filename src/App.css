@@ -64,6 +64,7 @@ width: 15rem;
   white-space: pre-line;
 }
 
+/* AddProduct */
 
 .add-product form{
   display: flex;
@@ -72,8 +73,8 @@ width: 15rem;
   margin-top: 5vh;
 }
 
-.add-product label, .edit-form label {
-  padding: 2vh;
+.add-product button {
+  margin-top:1%;
 }
 
 /* Navbar */
@@ -218,26 +219,33 @@ width: 15rem;
   align-items: center;
 }
 
+.edit-form {
+  position: absolute;
+  margin-left: 40%;
+}
+
+.edit-form button {
+  margin-top:1%;
+}
+
 .delete-btn {
-  margin-left: 60%;
+  position: relative;
+  margin-left: 72%;
+  margin-top:5%;
 }
 
 /* profile page */
 
-.profile-nav {
-  margin: 5%;
+.level {
+  margin: 10%;
   font-size: 20px;
 }
 
-.profile-nav ul, .order-list ul {
-  display: flex;
-}
-
-.profile-nav li, .order-list li, .order-detail li {
+.order-list li, .order-detail li {
   margin: 5%;
 }
-
+ 
 .order-list, .order-detail {
-  margin-left:40%;
+  margin-left:52.5%;
 }
 
