@@ -42,7 +42,7 @@ class ProfileNav extends React.Component {
 
             <li>
               <Link to="/">
-                <button type="submit" onClick={() => this.logoutUser()}>
+                <button className="button is-normal is-info" type="submit" onClick={() => this.logoutUser()}>
                   Logout
                 </button>
               </Link>

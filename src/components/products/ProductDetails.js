@@ -44,7 +44,7 @@ class ProductDetails extends Component {
           <div>{this.renderEditForm()}</div>
           <div>
             <button
-              className="delete-btn"
+              className="button is-normal is-danger delete-btn"
               onClick={() =>
                 this.deleteProduct(this.props.requestedProduct._id)
               }
@@ -71,7 +71,12 @@ class ProductDetails extends Component {
               <p>{this.props.requestedProduct.price} €</p>
 
               <br />
-              <button onClick={this.handleToCartBtn}>Add In Cart</button>
+              <button
+                className="button is-normal is-info"
+                onClick={this.handleToCartBtn}
+              >
+                Add In Cart
+              </button>
               <br />
               <Link to={"/shop"}>Back to products</Link>
               <hr />

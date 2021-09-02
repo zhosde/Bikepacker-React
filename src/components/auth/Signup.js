@@ -3,7 +3,7 @@ import authService from "./auth-service";
 
 class Signup extends Component {
 
-  state = { username: '', password: '' }
+  state = { username: '', password: '', errorMessage:'' }
 
   handleFormSubmit = (event) => {
   event.preventDefault();
@@ -17,7 +17,12 @@ class Signup extends Component {
       });
     this.props.getUser(createdUser, true);
   })
-  .catch(error => console.log(error))
+  .catch(error => {
+    this.setState({
+      errorMessage:
+        `Username needs to be unique. \n Password needs to have at least 6 chars \n and must contain at least one number, one lowercase and one uppercase letter`,
+    });
+  })
 }
  
 handleChange = (event) => {
@@ -29,29 +34,41 @@ handleChange = (event) => {
     return (
       <div className="signup">
         <p>Don't have an account?</p>
-        <form onSubmit={this.handleFormSubmit}>
-          <label>
-            Username:
-            <input
-              type="text"
-              name="username"
-              value={this.state.username}
-              onChange={this.handleChange}
-            />
-          </label>
-
-          <label>
-            Password:
-            <input
-              type="password"
-              name="password"
-              value={this.state.password}
-              onChange={this.handleChange}
-            />
-          </label>
-
-          <button type="submit"> Signup </button>
+        <form onSubmit={this.handleFormSubmit} className="box">
+          <div className="field">
+            <label className="label">Username</label>
+            <div className="control">
+              <input
+                className="input"
+                type="text"
+                required
+                name="username"
+                value={this.state.username}
+                onChange={this.handleChange}
+              />
+            </div>
+          </div>
+          <div className="field">
+            <label className="label">Password</label>
+            <div className="control">
+              <input
+                className="input"
+                type="password"
+                required
+                name="password"
+                value={this.state.password}
+                onChange={this.handleChange}
+              />
+            </div>
+          </div>
+          <button className="button is-primary" type="submit">
+            {" "}
+            Signup{" "}
+          </button>
         </form>
+        {this.state.errorMessage && (
+          <p className="err-info">{this.state.errorMessage}</p>
+        )}
       </div>
     );
   }
