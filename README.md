@@ -1,7 +1,7 @@
 # PrepperBuy-Frontend
 
 - [Link to the Web App](https://prepperbuy.netlify.app/)
-- [Link to Backend Github Page](https://github.com/zhosde/PrepperBuy-Frontend)
+- [Link to Backend Github Page](https://github.com/zhosde/PrepperBuy-Backend)
 
 ## About
 
