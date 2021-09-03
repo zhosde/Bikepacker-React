@@ -97,7 +97,7 @@ class Cart extends React.Component {
             </form>
           </div>
         ) : (
-          <div className="cart notification is-info">Currently No Product In Cart</div>
+          <div className="cart notification is-info">Currently No Product in Cart</div>
         )}
       </>
     );

@@ -80,9 +80,9 @@ class ProductDetails extends Component {
                 Add In Cart
               </button>
               <br />
-              <Link to={"/shop"}>Back to products</Link>
-              <hr/>
               <p>{this.props.requestedProduct.description}</p>
+              <hr/>
+              <Link to={"/shop"}>Back to products</Link>
             </div>
           </div>
         )}

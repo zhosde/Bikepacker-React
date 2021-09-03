@@ -29,6 +29,10 @@ class OrderDetails extends React.Component {
       });
   };
 
+  getOrderedItemQty = (itemId) => {
+    return this.state.orderedItemsArr.find((el)=>el.productID==itemId).qty
+  }
+
   getPurchasePrice = (itemId) => {
     return this.state.orderedItemsArr.find((el) => el.productID == itemId)
       .purchasePrice;
@@ -42,12 +46,13 @@ class OrderDetails extends React.Component {
               return (
                 <li key={itemId}>
                   <Link to={`/products/${itemId}`}>
-                   <p>{this.getProductDetails(itemId).name}</p>
+                    <p>{this.getProductDetails(itemId).name}</p>
                     {/* <p>{itemId}</p> */}
-                    <p>{this.getPurchasePrice(itemId)}</p>
+                    <p>{this.getPurchasePrice(itemId)}€</p>
+                    <p>Qty: {this.getOrderedItemQty(itemId)}</p>
                   </Link>
                 </li>
-              )
+              );
             })}
           </ul>
     );
@@ -76,7 +81,7 @@ class OrderDetails extends React.Component {
       return (
         <section className="order-detail">
           {this.renderOrderDetail()}
-          <label>Total Price: {this.getTotalPrice()}</label>
+          <label>Total Price: {this.getTotalPrice()}€</label>
         </section>
       );
     } else {
