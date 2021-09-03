@@ -50,6 +50,15 @@ class App extends Component {
     });
   };
 
+  // @todo --> clear cart state after logging out
+  // clearCartState = () => {
+  //   if(!this.state.loggedIn){
+  //     this.setState({
+  //       productsInCart: {}
+  //     });
+  //   }
+  // }
+
   deleteProductInCart = (id) => {
     // copy the obj
     const productIdCopy = Object.assign({}, this.state.productsInCart)

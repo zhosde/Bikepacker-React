@@ -175,6 +175,7 @@ width: 15rem;
 
 .product-list li {
   margin-left: 2vh;
+  margin-top: 2rem;
 }
 
 .product-list h3 {
@@ -246,17 +247,25 @@ width: 15rem;
 /* profile page */
 
 .level {
-  margin: 10%;
+  margin: 2rem 2rem;
   font-size: 20px;
   padding: 10px;
 }
-
-.order-list li, .order-detail li {
-  margin: 5%;
-}
  
-.order-list, .order-detail {
-  margin-left:52.5%;
+.order-detail {
+  margin-left:40%;
+}
+
+.order-list {
+  margin-left: 49%;
+}
+
+.order-detail label{
+  margin-left: 20%;
+}
+
+.order-detail table {
+  width: 60%;
 }
 
 .notification {
@@ -272,4 +281,9 @@ width: 15rem;
 .message {
   width:90%;
   margin-top: 8%;
+}
+
+.table {
+  text-align: center;
+  width:30vh;
 }

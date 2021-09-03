@@ -41,20 +41,27 @@ class OrderDetails extends React.Component {
   renderOrderDetail = () => {
     const itemIdArr = this.state.orderedItemsArr.map((el) => el.productID);
     return (
-          <ul>
-            {itemIdArr.map((itemId) => {
-              return (
-                <li key={itemId}>
-                  <Link to={`/products/${itemId}`}>
-                    <p>{this.getProductDetails(itemId).name}</p>
-                    {/* <p>{itemId}</p> */}
-                    <p>{this.getPurchasePrice(itemId)}€</p>
-                    <p>Qty: {this.getOrderedItemQty(itemId)}</p>
-                  </Link>
-                </li>
-              );
-            })}
-          </ul>
+      <table className="table">
+        <thead>
+          <tr>
+            <th className="is-info">Item</th>
+            <th className="is-info">Purchase Price</th>
+            <th className="is-info">Purchase Qty</th>
+          </tr>
+        </thead>
+        {itemIdArr.map((itemId) => {
+          return (
+            <tbody>
+              <Link to={`/products/${itemId}`}>
+                <th key={itemId}>{this.getProductDetails(itemId).name}</th>
+              </Link>
+              {/* <p>{itemId}</p> */}
+              <th>{this.getPurchasePrice(itemId)}€</th>
+              <th>{this.getOrderedItemQty(itemId)}</th>
+            </tbody>
+          );
+        })}
+      </table>
     );
   };
 
@@ -81,7 +88,10 @@ class OrderDetails extends React.Component {
       return (
         <section className="order-detail">
           {this.renderOrderDetail()}
-          <label>Total Price: {this.getTotalPrice()}€</label>
+          <label>
+            <strong>Total Price: </strong>
+            {this.getTotalPrice()}€
+          </label>
         </section>
       );
     } else {

@@ -27,17 +27,24 @@ class OrderList extends React.Component {
 
   renderOrderList = () => {
     return (
-      <ul>
+      <table className="table">
+        <thead>
+          <tr>
+            <th className='is-info'>Order Number</th>
+          </tr>
+        </thead>
         {this.state.listOfOrders.map((order) => {
           return (
-            <li key={order}>
-              <Link to={`/profile/orders/${order}`}>
-                Order {order.substring(0, 5)}
-              </Link>
-            </li>
+            <tbody>
+              <th key={order}>
+                <Link to={`/profile/orders/${order}`}>
+                  Order {order.substring(0, 5)}
+                </Link>
+              </th>
+            </tbody>
           );
         })}
-      </ul>
+      </table>
     );
   };
 
