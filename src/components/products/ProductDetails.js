@@ -38,7 +38,7 @@ class ProductDetails extends Component {
     this.props.addToCart(this.props.requestedProduct);
   };
 
-  ownershipCheck = () => {
+  adminCheck = () => {
     const currentUserIsAdmin = this.props.user && this.props.user.isAdmin;
     if (currentUserIsAdmin) {
       return (
@@ -81,12 +81,12 @@ class ProductDetails extends Component {
               </button>
               <br />
               <p>{this.props.requestedProduct.description}</p>
-              <hr/>
+              <hr />
               <Link to={"/shop"}>Back to products</Link>
             </div>
           </div>
         )}
-        <div> {this.ownershipCheck()} </div>
+        <div> {this.adminCheck()} </div>
       </>
     );
   }

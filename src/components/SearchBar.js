@@ -4,12 +4,12 @@ import { NavLink as Link } from "react-router-dom";
 class SearchBar extends Component {
   state = {
     searchWord: "",
-    SearchTheProduct: this.props.SearchTheProduct,
+    searchTheProduct: this.props.searchTheProduct,
   };
 
   handleSearch = async (event) => {
     await this.setState({ searchWord: event.target.value });
-    this.state.SearchTheProduct(this.state.searchWord);
+    this.state.searchTheProduct(this.state.searchWord);
   };
 
   render() {

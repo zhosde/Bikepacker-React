@@ -1,13 +1,13 @@
 import React, { Component } from "react";
-import service from "../../api/service"
-import {Redirect} from 'react-router-dom'
+import service from "../../api/service";
+import { Redirect } from "react-router-dom";
 
 class AddProduct extends Component {
   state = {
     name: "",
     description: "",
     category: "",
-    image: '',
+    image: "",
     price: 0,
     stocked: true,
   };
@@ -21,17 +21,6 @@ class AddProduct extends Component {
         console.log("added new product: ", res);
         this.props.updateTheState();
         this.props.history.push("/shop");
-      })
-
-      .then(() => {
-        this.setState({
-          name: "",
-          description: "",
-          category: "",
-          image: "",
-          price: 0,
-          stocked: true,
-        })
       })
       .catch((err) => console.log("Error while adding the new product: ", err));
   };

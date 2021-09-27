@@ -3,9 +3,6 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 
 class ProductList extends Component {
-  constructor(props) {
-    super(props);
-  }
   render() {
     return (
       <div className='product-list'>

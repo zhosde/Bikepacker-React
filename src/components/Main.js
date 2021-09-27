@@ -7,7 +7,7 @@ class Main extends Component {
     filterStr: "",
   };
 
-  SearchTheProduct = (input) => {
+  searchTheProduct = (input) => {
     this.setState({
       filterStr: input,
     });
@@ -31,7 +31,7 @@ class Main extends Component {
     return (
       <main>
         <div>
-          <SearchBar SearchTheProduct={this.SearchTheProduct} />
+          <SearchBar searchTheProduct={this.searchTheProduct} />
         </div>
         <hr className="hr-line" />
         <div>
