@@ -8,7 +8,7 @@ class ProfileNav extends React.Component {
   logoutUser = () => {
     authService.logout().then(() => {
       this.props.getUser(null, false);
-    });
+    }).then(()=> this.props.clearCartState())
   };
 
   render() {

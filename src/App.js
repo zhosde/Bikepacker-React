@@ -50,23 +50,25 @@ class App extends Component {
     });
   };
 
-  // @todo --> clear cart state after logging out
-  // clearCartState = () => {
-  //   if(!this.state.loggedIn){
-  //     this.setState({
-  //       productsInCart: {}
-  //     });
-  //   }
-  // }
+  // clear cart state after logging out
+  clearCartState = () => {
+    if (this.state.isLoggedIn === false) {
+      this.setState({
+        productsInCart: {}
+      });
+    }
+  };
 
   deleteProductInCart = (id) => {
     // copy the obj
-    const productIdCopy = Object.assign({}, this.state.productsInCart)
+    const productIdCopy = Object.assign({}, this.state.productsInCart);
     // convert obj into id arr, delete filtered id, get it back to obj
-    const IdObj = Object.keys(productIdCopy).filter(key=>key!==id).reduce((obj,key)=>{
-      obj[key] = productIdCopy[key]
-      return obj
-    },{})
+    const IdObj = Object.keys(productIdCopy)
+      .filter((key) => key !== id)
+      .reduce((obj, key) => {
+        obj[key] = productIdCopy[key];
+        return obj;
+      }, {});
     this.setState(() => {
       return {
         productsInCart: IdObj,
@@ -136,6 +138,7 @@ class App extends Component {
                     userData={this.state.user}
                     userIsLoggedIn={this.state.isLoggedIn}
                     getUser={this.getTheUser}
+                    clearCartState={this.clearCartState}
                   />
                 );
               }}

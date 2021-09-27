@@ -24,15 +24,8 @@ class EditProduct extends Component {
   };
 
   handleFormSubmit = (event) => {
-    const name = this.state.name;
-    const description = this.state.description;
-    const category = this.state.category;
-    const image = this.state.image;
-    const price = this.state.price;
-    const stocked = this.state.stocked;
-
+    const { name, description, category, image, price, stocked } = this.state;
     event.preventDefault();
-
     axios
       .put(
         `${process.env.REACT_APP_API_URL}/products/${this.props.theProduct._id}`,
@@ -41,7 +34,7 @@ class EditProduct extends Component {
       )
       .then(() => {
         // to updated product data (state in app.js)
-        this.props.updateTheState()
+        this.props.updateTheState();
       })
       .catch((error) => console.log(error));
   };
